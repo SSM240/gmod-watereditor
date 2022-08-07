@@ -1,0 +1,15 @@
+# ------------ mod name ------------
+
+mods.SSMHelper.name=SSM Helper
+
+# ------------ entities ------------
+
+entities.SSMHelper/ReverseKillbox.placements.name.normal=Reverse Killbox
+entities.SSMHelper/ZeroGravBoundsController.placements.name.normal=Zero Grav Bounds Controller
+entities.SSMHelper/MovingSolidThingy.placements.name.normal=Cursed Moving Solid Thingy
+
+# ------------ triggers ------------
+
+triggers.SSMHelper/DashCancelTrigger.placements.name.normal=Dash Cancel Trigger
+triggers.SSMHelper/BinoStorageTrigger.placements.name.normal=Bino Storage Trigger
+triggers.SSMHelper/ChangeMaxCassetteTrigger.placements.name.normal=Change Max Cassette Beat
