@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Monocle;
 
 namespace Celeste.Mod.SSMHelper
 {
@@ -25,6 +26,14 @@ namespace Celeste.Mod.SSMHelper
             Input.Rumble(RumbleStrength.Light, RumbleLength.Medium);
             player.Sprite.Scale = new Vector2(0.6f, 1.4f);
             player.Speed.Y = 160f;
+        }
+
+        /// <summary>
+        /// Returns a new <see cref="Vector2"/> with <paramref name="vec"/>'s angle and <paramref name="mag"/>'s magnitude.
+        /// </summary>
+        public static Vector2 WithMagnitude(this Vector2 vec, float mag)
+        {
+            return Calc.AngleToVector(vec.Angle(), mag);
         }
     }
 }

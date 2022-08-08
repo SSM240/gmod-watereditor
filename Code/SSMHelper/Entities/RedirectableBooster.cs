@@ -16,6 +16,9 @@ namespace Celeste.Mod.SSMHelper.Entities
 
         public Vector2 AimDirection;
 
+        // vanilla speed is 240
+        public const float BoostSpeed = 220f;
+
         #region Base class fields/methods
         private readonly DynamicData baseData;
 
@@ -85,7 +88,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             sprite.Play("spin");
 
             player.DashDir = AimDirection;
-            player.Speed = player.DashDir * 240f;
+            player.Speed = player.DashDir * BoostSpeed;
             if (player.DashDir.X != 0f)
             {
                 player.Facing = (Facings)Math.Sign(player.DashDir.X);
@@ -138,6 +141,8 @@ namespace Celeste.Mod.SSMHelper.Entities
             {
                 // replace with our own coroutine (easiest way to stop the particles)
                 booster.dashRoutine.Replace(booster.BoostRoutine(player, direction));
+                // reduce player speed
+                player.Speed = player.Speed.WithMagnitude(BoostSpeed);
             }
         }
     }
