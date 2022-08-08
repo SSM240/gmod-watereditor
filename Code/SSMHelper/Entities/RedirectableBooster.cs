@@ -87,7 +87,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             loopingSfx.DisposeOnTransition = false;
             sprite.Play("spin");
 
-            AimDirection = CorrectDashPrecision(AimDirection);
+            AimDirection = AimDirection.CorrectDashPrecision();
             player.DashDir = AimDirection;
             player.Speed = player.DashDir * BoostSpeed;
             if (player.DashDir.X != 0f)
@@ -145,23 +145,6 @@ namespace Celeste.Mod.SSMHelper.Entities
                 // reduce player speed
                 player.Speed = player.Speed.WithMagnitude(BoostSpeed);
             }
-        }
-
-        // copied from Player class
-        // still not sure if it'll do anything but no reason to take chances lol
-        private static Vector2 CorrectDashPrecision(Vector2 dir)
-        {
-            if (dir.X != 0f && Math.Abs(dir.X) < 0.001f)
-            {
-                dir.X = 0f;
-                dir.Y = Math.Sign(dir.Y);
-            }
-            else if (dir.Y != 0f && Math.Abs(dir.Y) < 0.001f)
-            {
-                dir.Y = 0f;
-                dir.X = Math.Sign(dir.X);
-            }
-            return dir;
         }
     }
 }

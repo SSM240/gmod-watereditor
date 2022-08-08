@@ -35,5 +35,22 @@ namespace Celeste.Mod.SSMHelper
         {
             return Calc.AngleToVector(vec.Angle(), mag);
         }
+
+        // copied from Player class
+        // still not sure if it'll do anything but no reason to take chances lol
+        public static Vector2 CorrectDashPrecision(this Vector2 dir)
+        {
+            if (dir.X != 0f && Math.Abs(dir.X) < 0.001f)
+            {
+                dir.X = 0f;
+                dir.Y = Math.Sign(dir.Y);
+            }
+            else if (dir.Y != 0f && Math.Abs(dir.Y) < 0.001f)
+            {
+                dir.Y = 0f;
+                dir.X = Math.Sign(dir.X);
+            }
+            return dir;
+        }
     }
 }
