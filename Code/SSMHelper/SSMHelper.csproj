@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\MovingSolidThingy.cs" />
+    <Compile Include="Entities\RedirectableBooster.cs" />
     <Compile Include="Entities\ReverseKillbox.cs" />
     <Compile Include="Entities\ZeroGravBoundsController.cs" />
     <Compile Include="Extensions.cs" />

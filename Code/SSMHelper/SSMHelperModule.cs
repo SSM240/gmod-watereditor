@@ -20,6 +20,7 @@ namespace Celeste.Mod.SSMHelper
             StarjumpTilesetHelper.Load();
             ReverseKillbox.Load();
             //ChangeMaxCassetteTrigger.Load();
+            RedirectableBooster.Load();
         }
 
         public override void Unload()
@@ -27,6 +28,7 @@ namespace Celeste.Mod.SSMHelper
             StarjumpTilesetHelper.Unload();
             ReverseKillbox.Unload();
             //ChangeMaxCassetteTrigger.Unload();
+            RedirectableBooster.Unload();
         }
     }
 }

@@ -7,6 +7,7 @@ mods.SSMHelper.name=SSM Helper
 entities.SSMHelper/ReverseKillbox.placements.name.normal=Reverse Killbox
 entities.SSMHelper/ZeroGravBoundsController.placements.name.normal=Zero Grav Bounds Controller
 entities.SSMHelper/MovingSolidThingy.placements.name.normal=Cursed Moving Solid Thingy
+entities.SSMHelper/RedirectableBooster.placements.name.normal=Redirectable Booster
 
 # ------------ triggers ------------
 
