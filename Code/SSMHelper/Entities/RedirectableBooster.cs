@@ -46,7 +46,7 @@ namespace Celeste.Mod.SSMHelper.Entities
                 return;
             }
             Player player = SceneAs<Level>().Tracker.GetEntity<Player>();
-            if (Input.Jump.Pressed)
+            if (Input.Jump.Pressed && player.Dashes > 0)
             {
                 Input.Jump.ConsumeBuffer();
                 IsStopped = true;
@@ -84,6 +84,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             loopingSfx.DisposeOnTransition = false;
             sprite.Play("spin");
 
+            player.Dashes = Math.Max(0, player.Dashes - 1);
             AimDirection = AimDirection.CorrectDashPrecision();
             player.DashDir = AimDirection;
             player.Speed = player.DashDir * BoostSpeed;
