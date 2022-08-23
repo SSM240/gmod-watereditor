@@ -23,15 +23,12 @@ namespace Celeste.Mod.SSMHelper.Entities
         private readonly DynamicData baseData;
 
         public SoundSource loopingSfx => baseData.Get<SoundSource>("loopingSfx");
-
         public Sprite sprite
         {
             get => baseData.Get<Sprite>("sprite");
             set => baseData.Set("sprite", value);
         }
-
         public Coroutine dashRoutine => baseData.Get<Coroutine>("dashRoutine");
-
         public Wiggler wiggler => baseData.Get<Wiggler>("wiggler");
         #endregion
 
