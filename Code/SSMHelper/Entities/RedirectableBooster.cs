@@ -18,6 +18,7 @@ namespace Celeste.Mod.SSMHelper.Entities
         public static ParticleType P_BurstBlue;
         public static ParticleType P_BurstPink;
         public static ParticleType P_PinkAppear;
+        public static ParticleType P_PinkBoosterGlow;
 
         private static ParticleType[] particleTypes;
 
@@ -63,6 +64,12 @@ namespace Celeste.Mod.SSMHelper.Entities
         public override void Update()
         {
             base.Update();
+
+            if (!BoostingPlayer && currentSprite == 2 && Scene.OnInterval(0.12f))
+            {
+                SceneAs<Level>().ParticlesFG.Emit(P_PinkBoosterGlow, 2, sprite.RenderPosition, Vector2.One * 11f);
+            }
+
             if (!BoostingPlayer)
             {
                 IsStopped = false;
@@ -223,6 +230,11 @@ namespace Celeste.Mod.SSMHelper.Entities
             P_PinkAppear = new ParticleType(P_RedAppear)
             {
                 Color = Calc.HexToColor("ff7ffa")
+            };
+            P_PinkBoosterGlow = new ParticleType(Refill.P_Glow)
+            {
+                Color = Calc.HexToColor("e27ecc"),
+                Color2 = Calc.HexToColor("ffe0f8")
             };
         }
 
