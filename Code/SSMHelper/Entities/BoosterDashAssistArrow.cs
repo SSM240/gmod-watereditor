@@ -18,8 +18,10 @@ namespace Celeste.Mod.SSMHelper.Entities
 
         private int lastIndex;
 
+        private bool wasVisibleLastFrame;
+
         public BoosterDashAssistArrow()
-            : base(active: false, visible: false)
+            : base(active: true, visible: false)
         {
             images = GFX.Game.GetAtlasSubtextures("util/dasharrow/dasharrow");
         }
@@ -30,7 +32,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             {
                 //float inputDir = Input.GetAimVector(player.Facing).Angle();
                 float inputDir = booster.AimDirection.Angle();
-                if (Calc.AbsAngleDiff(inputDir, Direction) >= 1.58079636f)
+                if (!Visible || !wasVisibleLastFrame || Calc.AbsAngleDiff(inputDir, Direction) >= 1.58079636f)
                 {
                     Direction = inputDir;
                     Scale = 0f;
@@ -46,7 +48,7 @@ namespace Celeste.Mod.SSMHelper.Entities
                     Audio.Play("event:/game/general/assist_dash_aim", booster.Center, "dash_direction", num2);
                 }
                 lastIndex = num2;
-                Visible = true;  // monumental degrees of laziness
+                wasVisibleLastFrame = Visible;
             }
         }
 

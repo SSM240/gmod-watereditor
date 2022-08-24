@@ -101,10 +101,9 @@ namespace Celeste.Mod.SSMHelper.Entities
         {
             loopingSfx.Stop();
             Audio.Play(SFX.game_05_redbooster_enter);
-            //sprite.Play("loop", restart: true);
             sprite.Play("inside");
             wiggler.Start();
-            dashAssistArrow.Active = true;
+            dashAssistArrow.Visible = true;
 
             player.Speed = Vector2.Zero;
         }
@@ -115,7 +114,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             loopingSfx.Play(SFX.game_05_redbooster_move_loop);
             loopingSfx.DisposeOnTransition = false;
             sprite.Play("spin");
-            dashAssistArrow.Active = dashAssistArrow.Visible = false;
+            dashAssistArrow.Visible = false;
 
             player.Dashes = Math.Max(0, player.Dashes - 1);
             AimDirection = AimDirection.CorrectDashPrecision();
