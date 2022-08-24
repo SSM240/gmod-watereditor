@@ -12,22 +12,35 @@ namespace Celeste.Mod.SSMHelper.Entities
     [CustomEntity("SSMHelper/RedirectableBooster")]
     public class RedirectableBooster : Booster
     {
+        // vanilla speed is 240
+        public const float BoostSpeed = 220f;
+
+        public static ParticleType P_BurstBlue;
+        public static ParticleType P_BurstPink;
+
+        private static ParticleType[] particleTypes;
+
         public bool IsStopped;
 
         public Vector2 AimDirection;
 
-        // vanilla speed is 240
-        public const float BoostSpeed = 220f;
+        private Sprite[] sprites = new Sprite[3];
+        private int currentSprite;
 
         #region Base class fields/methods
         private readonly DynamicData baseData;
 
-        public SoundSource loopingSfx => baseData.Get<SoundSource>("loopingSfx");
         public Sprite sprite
         {
             get => baseData.Get<Sprite>("sprite");
             set => baseData.Set("sprite", value);
         }
+        public ParticleType particleType
+        {
+            get => baseData.Get<ParticleType>("particleType");
+            set => baseData.Set("particleType", value);
+        }
+        public SoundSource loopingSfx => baseData.Get<SoundSource>("loopingSfx");
         public Coroutine dashRoutine => baseData.Get<Coroutine>("dashRoutine");
         public Wiggler wiggler => baseData.Get<Wiggler>("wiggler");
         #endregion
@@ -35,6 +48,11 @@ namespace Celeste.Mod.SSMHelper.Entities
         public RedirectableBooster(EntityData data, Vector2 offset) : base(data.Position + offset, true)
         {
             baseData = new DynamicData(typeof(Booster), this);
+
+            Add(sprites[0] = SSMHelperModule.SpriteBank.Create("boosterBlue"));
+            sprites[1] = sprite;
+            Add(sprites[2] = SSMHelperModule.SpriteBank.Create("boosterPink"));
+            SetSprite(2);
         }
 
         public override void Update()
@@ -66,11 +84,21 @@ namespace Celeste.Mod.SSMHelper.Entities
             }
         }
 
+        public override void Render()
+        {
+            base.Render();
+            if (AimDirection.X != 0)
+            {
+                sprite.FlipX = Math.Sign(AimDirection.X) < 0;
+            }
+        }
+
         private void OnStop(Player player)
         {
             loopingSfx.Stop();
             Audio.Play(SFX.game_05_redbooster_enter);
-            sprite.Play("loop", restart: true);
+            //sprite.Play("loop", restart: true);
+            sprite.Play("inside");
             wiggler.Start();
             AimDirection = player.DashDir;
 
@@ -93,21 +121,25 @@ namespace Celeste.Mod.SSMHelper.Entities
                 player.Facing = (Facings)Math.Sign(player.DashDir.X);
             }
 
-            sprite.FlipX = player.Facing == Facings.Left;
+            Celeste.Freeze(0.05f);
+            Dust.Burst(player.Position, (-player.DashDir).Angle(), 8, null);
+            SceneAs<Level>().Displacement.AddBurst(player.Center + playerOffset, 0.5f, 0f, 80f, 0.666f, Ease.QuadOut, Ease.QuadOut);
+            Input.Rumble(RumbleStrength.Strong, RumbleLength.Medium);
         }
 
-        // copypasted from vanilla but with different particle behavior
+        // copypasted from vanilla but with different graphical behavior
         // easier than IL hooking a coroutine
         private IEnumerator BoostRoutine(Player player, Vector2 dir)
         {
             float angle = (-dir).Angle();
             while ((player.StateMachine.State == Player.StDash || player.StateMachine.State == Player.StRedDash) && BoostingPlayer)
             {
+                SetSprite(player.Dashes);
                 sprite.RenderPosition = player.Center + playerOffset;
                 loopingSfx.Position = sprite.Position;
-                if (Scene.OnInterval(0.02f))
+                if (!IsStopped && Scene.OnInterval(0.02f))
                 {
-                    //(Scene as Level).ParticlesBG.Emit(particleType, 2, player.Center - dir * 3f + new Vector2(0f, -2f), new Vector2(3f, 3f), angle);
+                    (Scene as Level).ParticlesBG.Emit(particleType, 2, player.Center - dir * 3f + new Vector2(0f, -2f), new Vector2(3f, 3f), angle);
                 }
                 yield return null;
             }
@@ -123,14 +155,55 @@ namespace Celeste.Mod.SSMHelper.Entities
             Tag = 0;
         }
 
+        private void SetSprite(int index)
+        {
+            index = Calc.Clamp(index, 0, 2);
+            if (index == currentSprite)
+            {
+                return;
+            }
+            foreach (Sprite sprite in sprites)
+            {
+                sprite.Visible = false;
+            }
+            if (!string.IsNullOrEmpty(sprite.CurrentAnimationID))
+            {
+                sprites[index].Play(sprite.CurrentAnimationID);
+            }
+            sprites[index].Visible = true;
+            sprite = sprites[index];
+            particleType = particleTypes[index];
+            currentSprite = index;
+        }
+
         public static void Load()
         {
             On.Celeste.Booster.PlayerBoosted += On_Booster_PlayerBoosted;
+            On.Celeste.Booster.Respawn += On_Booster_Respawn;
         }
 
         public static void Unload()
         {
             On.Celeste.Booster.PlayerBoosted -= On_Booster_PlayerBoosted;
+            On.Celeste.Booster.Respawn -= On_Booster_Respawn;
+        }
+
+        public static void LoadParticles()
+        {
+            P_BurstBlue = new ParticleType(P_BurstRed)
+            {
+                Color = Calc.HexToColor("27678b")
+            };
+            P_BurstPink = new ParticleType(P_BurstRed)
+            {
+                Color = Calc.HexToColor("a84a99")
+            };
+            particleTypes = new ParticleType[3]
+            {
+                P_BurstBlue,
+                P_BurstRed,
+                P_BurstPink
+            };
         }
 
         private static void On_Booster_PlayerBoosted(On.Celeste.Booster.orig_PlayerBoosted orig, Booster self, Player player, Vector2 direction)
@@ -143,6 +216,15 @@ namespace Celeste.Mod.SSMHelper.Entities
                 // reduce player speed
                 player.Speed = player.Speed.WithMagnitude(BoostSpeed);
             }
+        }
+
+        private static void On_Booster_Respawn(On.Celeste.Booster.orig_Respawn orig, Booster self)
+        {
+            if (self is RedirectableBooster booster)
+            {
+                booster.SetSprite(2);
+            }
+            orig(self);
         }
     }
 }

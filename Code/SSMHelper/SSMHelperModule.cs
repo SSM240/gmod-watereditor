@@ -39,6 +39,7 @@ namespace Celeste.Mod.SSMHelper
             base.LoadContent(firstLoad);
 
             _CustomEntitySpriteBank = new SpriteBank(GFX.Game, "Graphics/SSMHelper/CustomEntitySprites.xml");
+            RedirectableBooster.LoadParticles();
         }
     }
 }
