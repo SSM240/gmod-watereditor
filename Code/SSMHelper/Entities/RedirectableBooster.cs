@@ -17,6 +17,7 @@ namespace Celeste.Mod.SSMHelper.Entities
 
         public static ParticleType P_BurstBlue;
         public static ParticleType P_BurstPink;
+        public static ParticleType P_PinkAppear;
 
         private static ParticleType[] particleTypes;
 
@@ -180,16 +181,27 @@ namespace Celeste.Mod.SSMHelper.Entities
             currentSprite = index;
         }
 
+        private void AppearParticles()
+        {
+            ParticleSystem particlesBG = SceneAs<Level>().ParticlesBG;
+            for (int i = 0; i < 360; i += 30)
+            {
+                particlesBG.Emit(P_PinkAppear, 1, Center, Vector2.One * 2f, i * ((float)Math.PI / 180f));
+            }
+        }
+
         public static void Load()
         {
             On.Celeste.Booster.PlayerBoosted += On_Booster_PlayerBoosted;
             On.Celeste.Booster.Respawn += On_Booster_Respawn;
+            On.Celeste.Booster.AppearParticles += On_Booster_AppearParticles;
         }
 
         public static void Unload()
         {
             On.Celeste.Booster.PlayerBoosted -= On_Booster_PlayerBoosted;
             On.Celeste.Booster.Respawn -= On_Booster_Respawn;
+            On.Celeste.Booster.AppearParticles -= On_Booster_AppearParticles;
         }
 
         public static void LoadParticles()
@@ -207,6 +219,10 @@ namespace Celeste.Mod.SSMHelper.Entities
                 P_BurstBlue,
                 P_BurstRed,
                 P_BurstPink
+            };
+            P_PinkAppear = new ParticleType(P_RedAppear)
+            {
+                Color = Calc.HexToColor("ff7ffa")
             };
         }
 
@@ -230,6 +246,16 @@ namespace Celeste.Mod.SSMHelper.Entities
                 booster.SetSprite(2);
             }
             orig(self);
+        }
+
+        private static void On_Booster_AppearParticles(On.Celeste.Booster.orig_AppearParticles orig, Booster self)
+        {
+            if (self is not RedirectableBooster booster)
+            {
+                orig(self);
+                return;
+            }
+            booster.AppearParticles();
         }
     }
 }
