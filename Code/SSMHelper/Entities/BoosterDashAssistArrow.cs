@@ -28,28 +28,28 @@ namespace Celeste.Mod.SSMHelper.Entities
 
         public override void Update()
         {
-            if (Entity is RedirectableBooster booster)
+            if (Entity is not RedirectableBooster booster)
             {
-                //float inputDir = Input.GetAimVector(player.Facing).Angle();
-                float inputDir = booster.AimDirection.Angle();
-                if (!Visible || !wasVisibleLastFrame || Calc.AbsAngleDiff(inputDir, Direction) >= 1.58079636f)
-                {
-                    Direction = inputDir;
-                    Scale = 0f;
-                }
-                else
-                {
-                    Direction = Calc.AngleApproach(Direction, inputDir, (float)Math.PI * 6f * Engine.RawDeltaTime);
-                }
-                Scale = Calc.Approach(Scale, 1f, Engine.DeltaTime * 4f);
-                int num2 = 1 + (8 + (int)Math.Round(inputDir / ((float)Math.PI / 4f))) % 8;
-                if (lastIndex != 0 && lastIndex != num2)
-                {
-                    Audio.Play("event:/game/general/assist_dash_aim", booster.Center, "dash_direction", num2);
-                }
-                lastIndex = num2;
-                wasVisibleLastFrame = Visible;
+                return;
             }
+            float inputDir = booster.AimDirection.Angle();
+            if (!Visible || !wasVisibleLastFrame || Calc.AbsAngleDiff(inputDir, Direction) >= 1.58079636f)
+            {
+                Direction = inputDir;
+                Scale = 0f;
+            }
+            else
+            {
+                Direction = Calc.AngleApproach(Direction, inputDir, (float)Math.PI * 6f * Engine.RawDeltaTime);
+            }
+            Scale = Calc.Approach(Scale, 1f, Engine.DeltaTime * 4f);
+            int num2 = 1 + (8 + (int)Math.Round(inputDir / ((float)Math.PI / 4f))) % 8;
+            if (lastIndex != 0 && lastIndex != num2)
+            {
+                Audio.Play("event:/game/general/assist_dash_aim", booster.Center, "dash_direction", num2);
+            }
+            lastIndex = num2;
+            wasVisibleLastFrame = Visible;
         }
 
         public override void Render()
