@@ -27,6 +27,8 @@ namespace Celeste.Mod.SSMHelper.Entities
         private Sprite[] sprites = new Sprite[3];
         private int currentSprite;
 
+        private BoosterDashAssistArrow dashAssistArrow;
+
         #region Base class fields/methods
         private readonly DynamicData baseData;
 
@@ -48,6 +50,8 @@ namespace Celeste.Mod.SSMHelper.Entities
         public RedirectableBooster(EntityData data, Vector2 offset) : base(data.Position + offset, true)
         {
             baseData = new DynamicData(typeof(Booster), this);
+
+            Add(dashAssistArrow = new BoosterDashAssistArrow());
 
             Add(sprites[0] = SSMHelperModule.SpriteBank.Create("boosterBlue"));
             sprites[1] = sprite;
@@ -100,6 +104,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             //sprite.Play("loop", restart: true);
             sprite.Play("inside");
             wiggler.Start();
+            dashAssistArrow.Active = true;
 
             player.Speed = Vector2.Zero;
         }
@@ -110,6 +115,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             loopingSfx.Play(SFX.game_05_redbooster_move_loop);
             loopingSfx.DisposeOnTransition = false;
             sprite.Play("spin");
+            dashAssistArrow.Active = dashAssistArrow.Visible = false;
 
             player.Dashes = Math.Max(0, player.Dashes - 1);
             AimDirection = AimDirection.CorrectDashPrecision();

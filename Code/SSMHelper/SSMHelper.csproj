@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\BoosterDashAssistArrow.cs" />
     <Compile Include="Entities\MovingSolidThingy.cs" />
     <Compile Include="Entities\RedirectableBooster.cs" />
     <Compile Include="Entities\ReverseKillbox.cs" />
