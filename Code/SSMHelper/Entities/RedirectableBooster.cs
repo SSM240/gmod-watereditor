@@ -100,7 +100,6 @@ namespace Celeste.Mod.SSMHelper.Entities
             //sprite.Play("loop", restart: true);
             sprite.Play("inside");
             wiggler.Start();
-            AimDirection = player.DashDir;
 
             player.Speed = Vector2.Zero;
         }
@@ -132,7 +131,7 @@ namespace Celeste.Mod.SSMHelper.Entities
         private IEnumerator BoostRoutine(Player player, Vector2 dir)
         {
             float angle = (-dir).Angle();
-            while ((player.StateMachine.State == Player.StDash || player.StateMachine.State == Player.StRedDash) && BoostingPlayer)
+            while ((player.StateMachine.State == Player.StRedDash) && BoostingPlayer)
             {
                 SetSprite(player.Dashes);
                 sprite.RenderPosition = player.Center + playerOffset;
@@ -215,6 +214,7 @@ namespace Celeste.Mod.SSMHelper.Entities
                 booster.dashRoutine.Replace(booster.BoostRoutine(player, direction));
                 // reduce player speed
                 player.Speed = player.Speed.WithMagnitude(BoostSpeed);
+                booster.AimDirection = player.DashDir;
             }
         }
 
