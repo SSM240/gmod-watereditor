@@ -20,7 +20,7 @@ namespace Celeste.Mod.SSMHelper.Entities
         public static ParticleType P_PinkAppear;
         public static ParticleType P_PinkBoosterGlow;
 
-        private static ParticleType[] particleTypes;
+        private static ParticleType[] burstParticleTypes;
 
         public bool IsStopped;
 
@@ -184,7 +184,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             }
             sprites[index].Visible = true;
             sprite = sprites[index];
-            particleType = particleTypes[index];
+            particleType = burstParticleTypes[index];
             currentSprite = index;
         }
 
@@ -221,7 +221,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             {
                 Color = Calc.HexToColor("a84a99")
             };
-            particleTypes = new ParticleType[3]
+            burstParticleTypes = new ParticleType[3]
             {
                 P_BurstBlue,
                 P_BurstRed,
