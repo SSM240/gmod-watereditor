@@ -247,6 +247,7 @@ namespace Celeste.Mod.SSMHelper.Entities
                 booster.dashRoutine.Replace(booster.BoostRoutine(player, direction));
                 // reduce player speed
                 player.Speed = player.Speed.WithMagnitude(BoostSpeed);
+
                 booster.AimDirection = player.DashDir;
             }
         }
