@@ -5,6 +5,9 @@ using Monocle;
 
 namespace Celeste.Mod.SSMHelper.Entities
 {
+    /// <summary>
+    /// Largely copied from <see cref="PlayerDashAssist"/>.
+    /// </summary>
     [Tracked(false)]
     public class BoosterDashAssistArrow : Component
     {
