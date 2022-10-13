@@ -15,7 +15,7 @@ namespace Celeste.Mod.SSMHelper.Entities
 
         private Hitbox detectHitbox;
 
-        private FallingBlock fallingBlock;
+        private BadelineCrushBlock crushBlock;
 
         public SeekerCrushZone(Vector2 position, int width, int height)
             : base(position)
@@ -32,8 +32,8 @@ namespace Celeste.Mod.SSMHelper.Entities
         public override void Awake(Scene scene)
         {
             base.Awake(scene);
-            fallingBlock = new FallingBlock(Position - new Vector2(0f, Height), 'G', (int)Width, (int)Height, true, false, false);
-            scene.Add(fallingBlock);
+            crushBlock = new BadelineCrushBlock(Position - new Vector2(0f, Height), '1', '1', (int)Width, (int)Height, this);
+            scene.Add(crushBlock);
         }
 
         public override void Update()
@@ -50,8 +50,7 @@ namespace Celeste.Mod.SSMHelper.Entities
                     {
                         activated = true;
                         capturedSeeker = seeker;
-                        fallingBlock.Triggered = true;
-                        fallingBlock.FallDelay = 0f;
+                        crushBlock.Activate();
                         break;
                     }
                 }
@@ -74,8 +73,8 @@ namespace Celeste.Mod.SSMHelper.Entities
         public override void Render()
         {
             base.Render();
-            Draw.Rect(Collider, Color.Violet * 0.3f);
-            Draw.HollowRect(Collider, Color.Violet);
+            Draw.Rect(Position + Vector2.One, Width - 2, Height - 2, Color.Violet * 0.15f);
+            Draw.HollowRect(Collider, Color.Violet * 0.5f);
         }
 
         public override void DebugRender(Camera camera)
