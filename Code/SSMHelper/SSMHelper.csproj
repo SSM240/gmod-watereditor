@@ -78,6 +78,7 @@
     <Compile Include="Entities\MovingSolidThingy.cs" />
     <Compile Include="Entities\RedirectableBooster.cs" />
     <Compile Include="Entities\ReverseKillbox.cs" />
+    <Compile Include="Entities\SeekerCrushZone.cs" />
     <Compile Include="Entities\ZeroGravBoundsController.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Triggers\ChangeMaxCassetteTrigger.cs" />
