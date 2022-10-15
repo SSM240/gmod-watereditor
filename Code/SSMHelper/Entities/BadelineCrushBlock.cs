@@ -71,9 +71,11 @@ namespace Celeste.Mod.SSMHelper.Entities
             badeline.Vanish();
         }
 
+
         private BadelineDummy CreateBadeline(Vector2 position)
         {
             BadelineDummy badeline = new BadelineDummy(position);
+            // change the sprite so the carry and throw animations can be used
             badeline.Remove(badeline.Sprite);
             badeline.Add(badeline.Sprite = new PlayerSprite(PlayerSpriteMode.MadelineAsBadeline));
             badeline.Hair.Sprite = badeline.Sprite;
