@@ -77,7 +77,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             badeline.Remove(badeline.Sprite);
             badeline.Add(badeline.Sprite = new PlayerSprite(PlayerSpriteMode.MadelineAsBadeline));
             badeline.Hair.Sprite = badeline.Sprite;
-            badeline.Sprite.Scale.X = Math.Sign(Position.X - badeline.Position.X);
+            badeline.Sprite.Scale.X = Math.Sign(CenterX - badeline.CenterX);
             return badeline;
         }
 
