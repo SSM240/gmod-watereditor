@@ -14,10 +14,14 @@ namespace Celeste.Mod.SSMHelper.Entities
 
         private SeekerCrushZone crushZone;
 
-        public BadelineCrushBlock(Vector2 position, char tile1, char tile2, int width, int height, SeekerCrushZone zone = null)
+        private Vector2 badelinePosition;
+
+        public BadelineCrushBlock(Vector2 position, char tile1, char tile2, int width, int height,
+            Vector2 badelinePosition, SeekerCrushZone zone = null)
             : base(position, width, height, safe: false)
         {
             crushZone = zone;
+            this.badelinePosition = badelinePosition;
             int newSeed = Calc.Random.Next();
             Calc.PushRandom(newSeed);
             Add(tilesStart = GFX.FGAutotiler.GenerateBox(tile1, width / 8, height / 8).TileGrid);
@@ -50,7 +54,7 @@ namespace Celeste.Mod.SSMHelper.Entities
         public IEnumerator Sequence()
         {
             Level level = Scene as Level;
-            BadelineDummy badeline = CreateBadeline(Position + new Vector2(-16f, Height));
+            BadelineDummy badeline = CreateBadeline(badelinePosition);
             badeline.Sprite.Play(PlayerSprite.IdleCarry);
             badeline.Appear(level, silent: true);
             Scene.Add(badeline);

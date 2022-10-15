@@ -17,22 +17,28 @@ namespace Celeste.Mod.SSMHelper.Entities
 
         private BadelineCrushBlock crushBlock;
 
-        public SeekerCrushZone(Vector2 position, int width, int height)
+        public SeekerCrushZone(Vector2 position, Vector2[] nodes, int width, int height, 
+            char tile1, char tile2, int blockHeight)
             : base(position)
         {
             Collider = new Hitbox(width, height);
             detectHitbox = new Hitbox(width - 12f, height - 12f, 6f, 6f);
+
+            Vector2 blockPosition = nodes[0];
+            Vector2 badelinePosition = nodes[1];
+
+            crushBlock = new BadelineCrushBlock(blockPosition, tile1, tile2, width, blockHeight, badelinePosition, this);
         }
 
         public SeekerCrushZone(EntityData data, Vector2 offset)
-            : this(data.Position + offset, data.Width, data.Height)
+            : this(data.Position + offset, data.Nodes, data.Width, data.Height,
+                  data.Char("tile1", '1'), data.Char("tile2", '2'), data.Int("blockHeight", 3))
         {
         }
 
         public override void Awake(Scene scene)
         {
             base.Awake(scene);
-            crushBlock = new BadelineCrushBlock(Position - new Vector2(0f, Height), '1', '1', (int)Width, (int)Height, this);
             scene.Add(crushBlock);
         }
 
