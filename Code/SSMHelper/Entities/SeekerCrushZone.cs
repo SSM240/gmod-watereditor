@@ -48,7 +48,7 @@ namespace Celeste.Mod.SSMHelper.Entities
                     {
                         activated = true;
                         capturedSeeker = seeker;
-                        SeekerCrushZoneBlock block = level.Tracker.GetEntity<SeekerCrushZoneBlock>();
+                        SeekerCrushZoneBlock block = level.Tracker.GetNearestEntity<SeekerCrushZoneBlock>(Position);
                         block?.Activate(this);
                         break;
                     }
