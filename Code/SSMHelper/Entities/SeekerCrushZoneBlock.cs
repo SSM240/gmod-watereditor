@@ -106,7 +106,7 @@ namespace Celeste.Mod.SSMHelper.Entities
         {
             Vector2 from = Position;
             // move this entity's bottom center to the crush zone's bottom center
-            Vector2 to = Position + (crushZone.BottomCenter - new Vector2(Width / 2, Height));
+            Vector2 to = crushZone.BottomCenter - new Vector2(Width / 2, Height);
             Tween moveTween = Tween.Create(Tween.TweenMode.Oneshot, Ease.QuintIn, 0.25f, start: true);
             moveTween.OnUpdate = (t) =>
             {
