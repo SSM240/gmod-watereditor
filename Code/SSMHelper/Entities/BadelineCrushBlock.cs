@@ -131,19 +131,16 @@ namespace Celeste.Mod.SSMHelper.Entities
             Add(visualTween);
         }
 
-        /// <summary>
-        /// Straight copypaste from <see cref="FinalBossMovingBlock"/>.
-        /// </summary>
-        /// <param name="moved"></param>
+        // entirely copypasted & cleaned up from FinalBossMovingBlock
         private void ImpactParticles(Vector2 moved)
         {
             if (moved.X < 0f)
             {
                 Vector2 value = new Vector2(0f, 2f);
-                for (int i = 0; (float)i < base.Height / 8f; i++)
+                for (int i = 0; i < Height / 8f; i++)
                 {
-                    Vector2 vector = new Vector2(base.Left - 1f, base.Top + 4f + (float)(i * 8));
-                    if (!base.Scene.CollideCheck<Water>(vector) && base.Scene.CollideCheck<Solid>(vector))
+                    Vector2 vector = new Vector2(Left - 1f, Top + 4f + (i * 8));
+                    if (!Scene.CollideCheck<Water>(vector) && Scene.CollideCheck<Solid>(vector))
                     {
                         SceneAs<Level>().ParticlesFG.Emit(CrushBlock.P_Impact, vector + value, 0f);
                         SceneAs<Level>().ParticlesFG.Emit(CrushBlock.P_Impact, vector - value, 0f);
@@ -153,10 +150,10 @@ namespace Celeste.Mod.SSMHelper.Entities
             else if (moved.X > 0f)
             {
                 Vector2 value2 = new Vector2(0f, 2f);
-                for (int j = 0; (float)j < base.Height / 8f; j++)
+                for (int j = 0; j < Height / 8f; j++)
                 {
-                    Vector2 vector2 = new Vector2(base.Right + 1f, base.Top + 4f + (float)(j * 8));
-                    if (!base.Scene.CollideCheck<Water>(vector2) && base.Scene.CollideCheck<Solid>(vector2))
+                    Vector2 vector2 = new Vector2(Right + 1f, Top + 4f + (j * 8));
+                    if (!Scene.CollideCheck<Water>(vector2) && Scene.CollideCheck<Solid>(vector2))
                     {
                         SceneAs<Level>().ParticlesFG.Emit(CrushBlock.P_Impact, vector2 + value2, (float)Math.PI);
                         SceneAs<Level>().ParticlesFG.Emit(CrushBlock.P_Impact, vector2 - value2, (float)Math.PI);
@@ -166,10 +163,10 @@ namespace Celeste.Mod.SSMHelper.Entities
             if (moved.Y < 0f)
             {
                 Vector2 value3 = new Vector2(2f, 0f);
-                for (int k = 0; (float)k < base.Width / 8f; k++)
+                for (int k = 0; k < Width / 8f; k++)
                 {
-                    Vector2 vector3 = new Vector2(base.Left + 4f + (float)(k * 8), base.Top - 1f);
-                    if (!base.Scene.CollideCheck<Water>(vector3) && base.Scene.CollideCheck<Solid>(vector3))
+                    Vector2 vector3 = new Vector2(Left + 4f + (k * 8), Top - 1f);
+                    if (!Scene.CollideCheck<Water>(vector3) && Scene.CollideCheck<Solid>(vector3))
                     {
                         SceneAs<Level>().ParticlesFG.Emit(CrushBlock.P_Impact, vector3 + value3, (float)Math.PI / 2f);
                         SceneAs<Level>().ParticlesFG.Emit(CrushBlock.P_Impact, vector3 - value3, (float)Math.PI / 2f);
@@ -183,10 +180,10 @@ namespace Celeste.Mod.SSMHelper.Entities
                     return;
                 }
                 Vector2 value4 = new Vector2(2f, 0f);
-                for (int l = 0; (float)l < base.Width / 8f; l++)
+                for (int l = 0; l < Width / 8f; l++)
                 {
-                    Vector2 vector4 = new Vector2(base.Left + 4f + (float)(l * 8), base.Bottom + 1f);
-                    if (!base.Scene.CollideCheck<Water>(vector4) && base.Scene.CollideCheck<Solid>(vector4))
+                    Vector2 vector4 = new Vector2(Left + 4f + (l * 8), Bottom + 1f);
+                    if (!Scene.CollideCheck<Water>(vector4) && Scene.CollideCheck<Solid>(vector4))
                     {
                         SceneAs<Level>().ParticlesFG.Emit(CrushBlock.P_Impact, vector4 + value4, -(float)Math.PI / 2f);
                         SceneAs<Level>().ParticlesFG.Emit(CrushBlock.P_Impact, vector4 - value4, -(float)Math.PI / 2f);
