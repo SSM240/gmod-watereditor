@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Celeste.Mod.Entities;
+using Microsoft.Xna.Framework;
 using Monocle;
 using System;
 using System.Collections;
@@ -6,7 +7,9 @@ using System.Collections.Generic;
 
 namespace Celeste.Mod.SSMHelper.Entities
 {
-    public class BadelineCrushBlock : Solid
+    [CustomEntity("SSMHelper/SeekerCrushZoneBlock")]
+    [Tracked]
+    public class SeekerCrushZoneBlock : Solid
     {
         private TileGrid tilesStart;
 
@@ -16,12 +19,11 @@ namespace Celeste.Mod.SSMHelper.Entities
 
         private Vector2 badelinePosition;
 
-        public BadelineCrushBlock(Vector2 position, char tile1, char tile2, int width, int height,
-            Vector2 badelinePosition, SeekerCrushZone zone = null)
+        public SeekerCrushZoneBlock(Vector2 position, Vector2[] nodes, int width, int height,
+            char tile1, char tile2)
             : base(position, width, height, safe: false)
         {
-            crushZone = zone;
-            this.badelinePosition = badelinePosition;
+            badelinePosition = nodes[0];
             int newSeed = Calc.Random.Next();
             Calc.PushRandom(newSeed);
             Add(tilesStart = GFX.FGAutotiler.GenerateBox(tile1, width / 8, height / 8).TileGrid);
@@ -46,8 +48,9 @@ namespace Celeste.Mod.SSMHelper.Entities
             }
         }
 
-        public void Activate()
+        public void Activate(SeekerCrushZone zone)
         {
+            crushZone = zone;
             Add(new Coroutine(Sequence()));
         }
 
@@ -96,7 +99,8 @@ namespace Celeste.Mod.SSMHelper.Entities
         private void AddMoveTween()
         {
             Vector2 from = Position;
-            Vector2 to = Position + new Vector2(0f, Height);
+            // move this entity's bottom center to the crush zone's bottom center
+            Vector2 to = Position + (crushZone.BottomCenter - new Vector2(Width / 2, Height));
             Tween moveTween = Tween.Create(Tween.TweenMode.Oneshot, Ease.QuintIn, 0.25f, start: true);
             moveTween.OnUpdate = (t) =>
             {
@@ -104,10 +108,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             };
             moveTween.OnComplete = (t) =>
             {
-                if (crushZone != null)
-                {
-                    crushZone.Visible = false;
-                }
+                crushZone.Visible = false;
                 if (CollideCheck<SolidTiles>(Position + (to - from).SafeNormalize() * 2f))
                 {
                     Audio.Play("event:/game/06_reflection/fallblock_boss_impact", Center);

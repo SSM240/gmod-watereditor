@@ -9,6 +9,7 @@ entities.SSMHelper/ZeroGravBoundsController.placements.name.normal=Zero Grav Bou
 entities.SSMHelper/MovingSolidThingy.placements.name.normal=Cursed Moving Solid Thingy
 entities.SSMHelper/RedirectableBooster.placements.name.normal=Redirectable Booster
 entities.SSMHelper/SeekerCrushZone.placements.name.normal=Seeker Crush Zone
+entities.SSMHelper/SeekerCrushZoneBlock.placements.name.normal=Seeker Crush Zone Block
 
 # ------------ triggers ------------
 

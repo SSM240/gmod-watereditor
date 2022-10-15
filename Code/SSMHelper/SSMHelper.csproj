@@ -74,7 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\BadelineCrushBlock.cs" />
+    <Compile Include="Entities\SeekerCrushZoneBlock.cs" />
     <Compile Include="Entities\BoosterDashAssistArrow.cs" />
     <Compile Include="Entities\MovingSolidThingy.cs" />
     <Compile Include="Entities\RedirectableBooster.cs" />
