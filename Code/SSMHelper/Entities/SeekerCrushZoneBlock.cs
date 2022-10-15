@@ -80,7 +80,6 @@ namespace Celeste.Mod.SSMHelper.Entities
             badeline.Vanish();
         }
 
-
         private BadelineDummy CreateBadeline(Vector2 position)
         {
             BadelineDummy badeline = new BadelineDummy(position);
