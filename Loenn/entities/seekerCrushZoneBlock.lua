@@ -20,5 +20,6 @@ fieldInformation = fakeTilesHelper.addTileFieldInformation(fieldInformation, "ti
 seekerCrushZoneBlock.fieldInformation = fieldInformation
 
 seekerCrushZoneBlock.nodeTexture = "characters/badeline/sleep00"
+seekerCrushZoneBlock.nodeJustification = {0.5, 1}
 
 return seekerCrushZoneBlock

@@ -23,7 +23,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             char tile1, char tile2)
             : base(position, width, height, safe: false)
         {
-            badelinePosition = nodes[0] + new Vector2(0, 16); // better match position in lönn plugin lol
+            badelinePosition = nodes[0];
             int newSeed = Calc.Random.Next();
             Calc.PushRandom(newSeed);
             Add(tilesStart = GFX.FGAutotiler.GenerateBox(tile1, width / 8, height / 8).TileGrid);
