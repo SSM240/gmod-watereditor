@@ -36,7 +36,7 @@ namespace Celeste.Mod.SSMHelper.Entities
         }
 
         public SeekerCrushZoneBlock(EntityData data, Vector2 offset)
-            : this(data.Position, data.Nodes, data.Width, data.Height,
+            : this(data.Position + offset, data.Nodes, data.Width, data.Height,
                   data.Char("tile1", 'g'), data.Char("tile2", 'G'))
         {
         }
