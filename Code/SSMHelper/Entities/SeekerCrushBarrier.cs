@@ -110,10 +110,19 @@ namespace Celeste.Mod.SSMHelper.Entities
 
         private IEnumerator RemovalRoutine()
         {
-            // todo: figure out better visual effects
             Solidify = 1f;
             solidifyDelay = 1f;
             removing = true;
+            yield return FlashFadeIn();
+            Collidable = false;
+            SceneAs<Level>().Tracker.GetEntity<SeekerCrushBarrierRenderer>().Untrack(this);
+            particlesVisible = false;
+            yield return FlashFadeOut();
+            RemoveSelf();
+        }
+
+        private IEnumerator FlashFadeIn()
+        {
             Tween flashFadeIn = Tween.Create(Tween.TweenMode.Oneshot, Ease.CubeOut, 0.15f, true);
             flashFadeIn.OnStart = (t) =>
             {
@@ -127,11 +136,10 @@ namespace Celeste.Mod.SSMHelper.Entities
             };
             Add(flashFadeIn);
             yield return flashFadeIn.Wait();
+        }
 
-            Collidable = false;
-            SceneAs<Level>().Tracker.GetEntity<SeekerCrushBarrierRenderer>().Untrack(this);
-            particlesVisible = false;
-
+        private IEnumerator FlashFadeOut()
+        {
             Tween flashFadeOut = Tween.Create(Tween.TweenMode.Oneshot, Ease.Linear, 0.1f, true);
             flashFadeOut.OnStart = (t) =>
             {
@@ -144,8 +152,6 @@ namespace Celeste.Mod.SSMHelper.Entities
             };
             Add(flashFadeOut);
             yield return flashFadeOut.Wait();
-
-            RemoveSelf();
         }
 
         public static void Load()
