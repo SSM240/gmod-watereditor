@@ -54,6 +54,13 @@ namespace Celeste.Mod.SSMHelper.Entities
             }
         }
 
+        public override void OnShake(Vector2 amount)
+        {
+            base.OnShake(amount);
+            tilesStart.Position += amount;
+            tilesEnd.Position += amount;
+        }
+
         public void Activate(SeekerCrushZone zone)
         {
             crushZone = zone;
@@ -68,6 +75,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             badeline.Appear(level, silent: true);
             Scene.Add(badeline);
             Audio.Play(SFX.char_bad_booster_begin);
+            StartShaking(0.25f);
             AddVisualTween();
             
             yield return 0.25f;
