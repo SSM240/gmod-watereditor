@@ -53,7 +53,7 @@ namespace Celeste.Mod.SSMHelper.Entities
         public override void Awake(Scene scene)
         {
             base.Awake(scene);
-            if (scene.Tracker.CountEntities<Seeker>() == 0)
+            if (scene.Tracker.CountEntities<Seeker>() == 0 || CollideCheck<Player>())
             {
                 RemoveSelf();
             }
