@@ -104,7 +104,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             Flashing = true;
             Solidify = 1f;
             solidifyDelay = 1f;
-            Audio.Play("event:/game/03_resort/forcefield_bump", Position);
+            Audio.Play(SFX.game_03_forcefield_bump, Position);
             return DashCollisionResults.Bounce;
         }
 
