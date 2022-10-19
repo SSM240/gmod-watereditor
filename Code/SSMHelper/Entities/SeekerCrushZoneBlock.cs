@@ -143,6 +143,7 @@ namespace Celeste.Mod.SSMHelper.Entities
         private void ImpactParticles(Vector2 moved)
         {
             Level level = SceneAs<Level>();
+            bool collided = false;
             if (moved.X < 0f)
             {
                 Vector2 offset = new Vector2(0f, 2f);
@@ -151,6 +152,7 @@ namespace Celeste.Mod.SSMHelper.Entities
                     Vector2 leftEdge = new Vector2(Left - 1f, Top + 4f + (i * 8));
                     if (!Scene.CollideCheck<Water>(leftEdge) && Scene.CollideCheck<Solid>(leftEdge))
                     {
+                        collided = true;
                         level.ParticlesFG.Emit(CrushBlock.P_Impact, leftEdge + offset, 0f);
                         level.ParticlesFG.Emit(CrushBlock.P_Impact, leftEdge - offset, 0f);
                     }
@@ -164,6 +166,7 @@ namespace Celeste.Mod.SSMHelper.Entities
                     Vector2 rightEdge = new Vector2(Right + 1f, Top + 4f + (j * 8));
                     if (!Scene.CollideCheck<Water>(rightEdge) && Scene.CollideCheck<Solid>(rightEdge))
                     {
+                        collided = true;
                         level.ParticlesFG.Emit(CrushBlock.P_Impact, rightEdge + offset, (float)Math.PI);
                         level.ParticlesFG.Emit(CrushBlock.P_Impact, rightEdge - offset, (float)Math.PI);
                     }
@@ -177,6 +180,7 @@ namespace Celeste.Mod.SSMHelper.Entities
                     Vector2 topEdge = new Vector2(Left + 4f + (k * 8), Top - 1f);
                     if (!Scene.CollideCheck<Water>(topEdge) && Scene.CollideCheck<Solid>(topEdge))
                     {
+                        collided = true;
                         level.ParticlesFG.Emit(CrushBlock.P_Impact, topEdge + offset, (float)Math.PI / 2f);
                         level.ParticlesFG.Emit(CrushBlock.P_Impact, topEdge - offset, (float)Math.PI / 2f);
                     }
@@ -190,10 +194,15 @@ namespace Celeste.Mod.SSMHelper.Entities
                     Vector2 bottomEdge = new Vector2(Left + 4f + (l * 8), Bottom + 1f);
                     if (!Scene.CollideCheck<Water>(bottomEdge) && Scene.CollideCheck<Solid>(bottomEdge))
                     {
+                        collided = true;
                         level.ParticlesFG.Emit(CrushBlock.P_Impact, bottomEdge + offset, -(float)Math.PI / 2f);
                         level.ParticlesFG.Emit(CrushBlock.P_Impact, bottomEdge - offset, -(float)Math.PI / 2f);
                     }
                 }
+            }
+            if (collided)
+            {
+                level.DirectionalShake(moved);
             }
         }
     }
