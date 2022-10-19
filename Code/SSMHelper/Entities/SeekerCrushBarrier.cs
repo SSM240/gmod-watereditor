@@ -87,7 +87,12 @@ namespace Celeste.Mod.SSMHelper.Entities
             }
             if (removing)
             {
-                Draw.Rect(Collider, removingFlashColor * removingFlashAlpha);
+                float alpha = removingFlashAlpha;
+                if (Settings.Instance.DisableFlashes)
+                {
+                    alpha *= 0.2f;
+                }
+                Draw.Rect(Collider, removingFlashColor * alpha);
             }
         }
 
@@ -109,27 +114,28 @@ namespace Celeste.Mod.SSMHelper.Entities
             Solidify = 1f;
             solidifyDelay = 1f;
             removing = true;
-            SceneAs<Level>().Tracker.GetEntity<SeekerCrushBarrierRenderer>().Untrack(this);
-            Tween flashFadeIn = Tween.Create(Tween.TweenMode.Oneshot, Ease.QuadOut, 0.25f, true);
-            float startAlpha = 0.45f;
+            Tween flashFadeIn = Tween.Create(Tween.TweenMode.Oneshot, Ease.CubeOut, 0.15f, true);
             flashFadeIn.OnStart = (t) =>
             {
                 removingFlashColor = FillColor;
-                removingFlashAlpha = startAlpha;
+                removingFlashAlpha = 0f;
             };
             flashFadeIn.OnUpdate = (t) =>
             {
-                removingFlashColor = Color.Lerp(FillColor, Color.Lerp(FillColor, Color.White, 0.75f), t.Eased);
-                removingFlashAlpha = t.Eased * (1 - startAlpha) + startAlpha;
+                removingFlashColor = Color.Lerp(FillColor, Color.Lerp(FillColor, Color.White, 0.5f), t.Eased);
+                removingFlashAlpha = t.Eased;
             };
             Add(flashFadeIn);
             yield return flashFadeIn.Wait();
+
             Collidable = false;
+            SceneAs<Level>().Tracker.GetEntity<SeekerCrushBarrierRenderer>().Untrack(this);
             particlesVisible = false;
-            Tween flashFadeOut = Tween.Create(Tween.TweenMode.Oneshot, Ease.CubeIn, 0.5f, true);
+
+            Tween flashFadeOut = Tween.Create(Tween.TweenMode.Oneshot, Ease.Linear, 0.1f, true);
             flashFadeOut.OnStart = (t) =>
             {
-                removingFlashColor = Color.White;
+                removingFlashColor = Color.Lerp(FillColor, Color.White, 0.5f);
                 removingFlashAlpha = 1f;
             };
             flashFadeOut.OnUpdate = (t) =>
@@ -138,6 +144,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             };
             Add(flashFadeOut);
             yield return flashFadeOut.Wait();
+
             RemoveSelf();
         }
 
