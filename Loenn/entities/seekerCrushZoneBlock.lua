@@ -20,11 +20,8 @@ fieldInformation = fakeTilesHelper.getFieldInformation("tile1")
 fieldInformation = fakeTilesHelper.addTileFieldInformation(fieldInformation, "tile2")
 seekerCrushZoneBlock.fieldInformation = fieldInformation
 
-function seekerCrushZoneBlock.nodeSprite(room, entity, node, nodeIndex)
-    return drawableSprite.fromTexture("characters/badeline/sleep00", node)
-end
+seekerCrushZoneBlock.nodeTexture = "characters/badeline/sleep00"
 seekerCrushZoneBlock.nodeJustification = {0.5, 1}
 seekerCrushZoneBlock.nodeVisibility = "always"
-seekerCrushZoneBlock.nodeLineRenderType = "line"
 
 return seekerCrushZoneBlock
