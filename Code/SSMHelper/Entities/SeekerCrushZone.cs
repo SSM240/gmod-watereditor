@@ -20,7 +20,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             : base(position)
         {
             Collider = new Hitbox(width, height);
-            detectHitbox = new Hitbox(width - 12f, height - 12f, 6f, 6f);
+            detectHitbox = new Hitbox(width - 10f, height - 10f, 5f, 5f);
         }
 
         public SeekerCrushZone(EntityData data, Vector2 offset)
