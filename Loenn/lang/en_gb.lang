@@ -10,6 +10,7 @@ entities.SSMHelper/MovingSolidThingy.placements.name.normal=Cursed Moving Solid 
 entities.SSMHelper/RedirectableBooster.placements.name.normal=Redirectable Booster
 entities.SSMHelper/SeekerCrushZone.placements.name.normal=Seeker Crush Zone
 entities.SSMHelper/SeekerCrushZoneBlock.placements.name.normal=Seeker Crush Zone Block
+entities.SSMHelper/SeekerCrushBarrier.placements.name.normal=Seeker Crush Barrier
 
 # ------------ triggers ------------
 

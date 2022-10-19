@@ -24,6 +24,8 @@ namespace Celeste.Mod.SSMHelper
             ReverseKillbox.Load();
             //ChangeMaxCassetteTrigger.Load();
             RedirectableBooster.Load();
+            SeekerCrushBarrier.Load();
+            SeekerCrushBarrierRenderer.Load();
         }
 
         public override void Unload()
@@ -32,6 +34,8 @@ namespace Celeste.Mod.SSMHelper
             ReverseKillbox.Unload();
             //ChangeMaxCassetteTrigger.Unload();
             RedirectableBooster.Unload();
+            SeekerCrushBarrier.Unload();
+            SeekerCrushBarrierRenderer.Unload();
         }
 
         public override void LoadContent(bool firstLoad)

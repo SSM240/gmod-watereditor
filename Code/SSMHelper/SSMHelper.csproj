@@ -74,6 +74,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\SeekerCrushBarrier.cs" />
+    <Compile Include="Entities\SeekerCrushBarrierRenderer.cs" />
     <Compile Include="Entities\SeekerCrushZoneBlock.cs" />
     <Compile Include="Entities\BoosterDashAssistArrow.cs" />
     <Compile Include="Entities\MovingSolidThingy.cs" />
