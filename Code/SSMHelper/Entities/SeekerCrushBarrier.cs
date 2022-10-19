@@ -17,6 +17,7 @@ namespace Celeste.Mod.SSMHelper.Entities
 
         private bool removing = false;
         private float removingFlashAlpha;
+        private Color removingFlashColor;
         private bool particlesVisible = true;
 
         private DynamicData baseData;
@@ -95,8 +96,6 @@ namespace Celeste.Mod.SSMHelper.Entities
                 Draw.Rect(Collider, removingFlashColor * alpha);
             }
         }
-
-        private Color removingFlashColor;
 
         private DashCollisionResults OnDashed(Player player, Vector2 direction)
         {
