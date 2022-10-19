@@ -142,59 +142,56 @@ namespace Celeste.Mod.SSMHelper.Entities
         // entirely copypasted & cleaned up from FinalBossMovingBlock
         private void ImpactParticles(Vector2 moved)
         {
+            Level level = SceneAs<Level>();
             if (moved.X < 0f)
             {
-                Vector2 value = new Vector2(0f, 2f);
+                Vector2 offset = new Vector2(0f, 2f);
                 for (int i = 0; i < Height / 8f; i++)
                 {
-                    Vector2 vector = new Vector2(Left - 1f, Top + 4f + (i * 8));
-                    if (!Scene.CollideCheck<Water>(vector) && Scene.CollideCheck<Solid>(vector))
+                    Vector2 leftEdge = new Vector2(Left - 1f, Top + 4f + (i * 8));
+                    if (!Scene.CollideCheck<Water>(leftEdge) && Scene.CollideCheck<Solid>(leftEdge))
                     {
-                        SceneAs<Level>().ParticlesFG.Emit(CrushBlock.P_Impact, vector + value, 0f);
-                        SceneAs<Level>().ParticlesFG.Emit(CrushBlock.P_Impact, vector - value, 0f);
+                        level.ParticlesFG.Emit(CrushBlock.P_Impact, leftEdge + offset, 0f);
+                        level.ParticlesFG.Emit(CrushBlock.P_Impact, leftEdge - offset, 0f);
                     }
                 }
             }
             else if (moved.X > 0f)
             {
-                Vector2 value2 = new Vector2(0f, 2f);
+                Vector2 offset = new Vector2(0f, 2f);
                 for (int j = 0; j < Height / 8f; j++)
                 {
-                    Vector2 vector2 = new Vector2(Right + 1f, Top + 4f + (j * 8));
-                    if (!Scene.CollideCheck<Water>(vector2) && Scene.CollideCheck<Solid>(vector2))
+                    Vector2 rightEdge = new Vector2(Right + 1f, Top + 4f + (j * 8));
+                    if (!Scene.CollideCheck<Water>(rightEdge) && Scene.CollideCheck<Solid>(rightEdge))
                     {
-                        SceneAs<Level>().ParticlesFG.Emit(CrushBlock.P_Impact, vector2 + value2, (float)Math.PI);
-                        SceneAs<Level>().ParticlesFG.Emit(CrushBlock.P_Impact, vector2 - value2, (float)Math.PI);
+                        level.ParticlesFG.Emit(CrushBlock.P_Impact, rightEdge + offset, (float)Math.PI);
+                        level.ParticlesFG.Emit(CrushBlock.P_Impact, rightEdge - offset, (float)Math.PI);
                     }
                 }
             }
             if (moved.Y < 0f)
             {
-                Vector2 value3 = new Vector2(2f, 0f);
+                Vector2 offset = new Vector2(2f, 0f);
                 for (int k = 0; k < Width / 8f; k++)
                 {
-                    Vector2 vector3 = new Vector2(Left + 4f + (k * 8), Top - 1f);
-                    if (!Scene.CollideCheck<Water>(vector3) && Scene.CollideCheck<Solid>(vector3))
+                    Vector2 topEdge = new Vector2(Left + 4f + (k * 8), Top - 1f);
+                    if (!Scene.CollideCheck<Water>(topEdge) && Scene.CollideCheck<Solid>(topEdge))
                     {
-                        SceneAs<Level>().ParticlesFG.Emit(CrushBlock.P_Impact, vector3 + value3, (float)Math.PI / 2f);
-                        SceneAs<Level>().ParticlesFG.Emit(CrushBlock.P_Impact, vector3 - value3, (float)Math.PI / 2f);
+                        level.ParticlesFG.Emit(CrushBlock.P_Impact, topEdge + offset, (float)Math.PI / 2f);
+                        level.ParticlesFG.Emit(CrushBlock.P_Impact, topEdge - offset, (float)Math.PI / 2f);
                     }
                 }
             }
-            else
+            else if (moved.Y > 0f)
             {
-                if (!(moved.Y > 0f))
-                {
-                    return;
-                }
-                Vector2 value4 = new Vector2(2f, 0f);
+                Vector2 offset = new Vector2(2f, 0f);
                 for (int l = 0; l < Width / 8f; l++)
                 {
-                    Vector2 vector4 = new Vector2(Left + 4f + (l * 8), Bottom + 1f);
-                    if (!Scene.CollideCheck<Water>(vector4) && Scene.CollideCheck<Solid>(vector4))
+                    Vector2 bottomEdge = new Vector2(Left + 4f + (l * 8), Bottom + 1f);
+                    if (!Scene.CollideCheck<Water>(bottomEdge) && Scene.CollideCheck<Solid>(bottomEdge))
                     {
-                        SceneAs<Level>().ParticlesFG.Emit(CrushBlock.P_Impact, vector4 + value4, -(float)Math.PI / 2f);
-                        SceneAs<Level>().ParticlesFG.Emit(CrushBlock.P_Impact, vector4 - value4, -(float)Math.PI / 2f);
+                        level.ParticlesFG.Emit(CrushBlock.P_Impact, bottomEdge + offset, -(float)Math.PI / 2f);
+                        level.ParticlesFG.Emit(CrushBlock.P_Impact, bottomEdge - offset, -(float)Math.PI / 2f);
                     }
                 }
             }
