@@ -71,14 +71,21 @@ namespace Celeste.Mod.SSMHelper.Entities
         {
             Level level = Scene as Level;
             BadelineDummy badeline = CreateBadeline(badelinePosition);
-            badeline.Sprite.Play(PlayerSprite.IdleCarry);
+            badeline.Sprite.Play(PlayerSprite.FallCarry);
             badeline.Appear(level, silent: true);
             Scene.Add(badeline);
             Audio.Play(SFX.char_bad_booster_begin);
-            StartShaking(0.25f);
+            StartShaking(2f);
             AddVisualTween();
             
             yield return 0.25f;
+            float playerWaitTimer = 1f;
+            while (crushZone.CollideCheck<Player>() && playerWaitTimer > 0f)
+            {
+                playerWaitTimer -= Engine.DeltaTime;
+                yield return null;
+            }
+            StopShaking();
 
             Add(new Coroutine(BadelineThrow(badeline)));
             AddMoveTween();
