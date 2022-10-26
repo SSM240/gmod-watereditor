@@ -74,14 +74,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\SeekerCrushBarrier.cs" />
-    <Compile Include="Entities\SeekerCrushBarrierRenderer.cs" />
-    <Compile Include="Entities\SeekerCrushZoneBlock.cs" />
+    <Compile Include="Entities\SeekerStuff\SeekerCrushBarrier.cs" />
+    <Compile Include="Entities\SeekerStuff\SeekerCrushBarrierRenderer.cs" />
+    <Compile Include="Entities\SeekerStuff\SeekerCrushZoneBlock.cs" />
     <Compile Include="Entities\BoosterDashAssistArrow.cs" />
     <Compile Include="Entities\MovingSolidThingy.cs" />
     <Compile Include="Entities\RedirectableBooster.cs" />
     <Compile Include="Entities\ReverseKillbox.cs" />
-    <Compile Include="Entities\SeekerCrushZone.cs" />
+    <Compile Include="Entities\SeekerStuff\SeekerCrushZone.cs" />
     <Compile Include="Entities\ZeroGravBoundsController.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Triggers\ChangeMaxCassetteTrigger.cs" />
