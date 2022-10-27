@@ -101,9 +101,13 @@ namespace Celeste.Mod.SSMHelper.Entities
         private static void On_BackdropRenderer_Render(On.Celeste.BackdropRenderer.orig_Render orig, BackdropRenderer self, Scene scene)
         {
             orig(self, scene);
-            List<Entity> crushZones = scene.Tracker.GetEntities<SeekerCrushZone>();
             // render seeker crush zones like FG backdrops (to ignore lighting effects)
-            if (crushZones.Count > 0 && self == (scene as Level)?.Foreground)
+            if (scene is not Level level || self != level.Foreground)
+            {
+                return;
+            }
+            List<Entity> crushZones = level.Tracker.GetEntities<SeekerCrushZone>();
+            if (crushZones.Count > 0)
             {
                 self.StartSpritebatch(BlendState.AlphaBlend);
                 foreach (SeekerCrushZone zone in crushZones)
