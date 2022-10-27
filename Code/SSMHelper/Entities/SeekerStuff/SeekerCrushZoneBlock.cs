@@ -77,7 +77,8 @@ namespace Celeste.Mod.SSMHelper.Entities
             Audio.Play(SFX.char_bad_booster_begin);
             StartShaking(2f);
             AddVisualTween();
-            
+            crushZone.Visible = false;
+
             yield return 0.25f;
             float playerWaitTimer = 1f;
             while (crushZone.CollideCheck<Player>() && playerWaitTimer > 0f)
@@ -128,7 +129,6 @@ namespace Celeste.Mod.SSMHelper.Entities
             };
             moveTween.OnComplete = (t) =>
             {
-                crushZone.Visible = false;
                 if (CollideCheck<SolidTiles>(Position + (to - from).SafeNormalize() * 2f))
                 {
                     Audio.Play("event:/game/06_reflection/fallblock_boss_impact", Center);

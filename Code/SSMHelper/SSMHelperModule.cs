@@ -26,6 +26,7 @@ namespace Celeste.Mod.SSMHelper
             RedirectableBooster.Load();
             SeekerCrushBarrier.Load();
             SeekerCrushBarrierRenderer.Load();
+            SeekerCrushZone.Load();
         }
 
         public override void Unload()
@@ -36,6 +37,7 @@ namespace Celeste.Mod.SSMHelper
             RedirectableBooster.Unload();
             SeekerCrushBarrier.Unload();
             SeekerCrushBarrierRenderer.Unload();
+            SeekerCrushZone.Unload();
         }
 
         public override void LoadContent(bool firstLoad)

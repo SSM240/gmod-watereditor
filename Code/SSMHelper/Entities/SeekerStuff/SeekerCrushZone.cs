@@ -1,5 +1,6 @@
 ﻿using Celeste.Mod.Entities;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Monocle;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 namespace Celeste.Mod.SSMHelper.Entities
 {
     [CustomEntity("SSMHelper/SeekerCrushZone")]
+    [Tracked]
     public class SeekerCrushZone : Entity
     {
         private bool activated = false;
@@ -69,11 +71,12 @@ namespace Celeste.Mod.SSMHelper.Entities
             seeker.Bottom = Math.Min(seeker.Bottom, this.Bottom - 6f);
         }
 
-        public override void Render()
+        public new void Render()
         {
             base.Render();
-            Draw.Rect(Position + Vector2.One, Width - 2, Height - 2, Color.Violet * 0.15f);
-            Draw.HollowRect(Collider, Color.Violet * 0.5f);
+            Vector2 position = Position - SceneAs<Level>().Camera.Position;
+            Draw.Rect(position + Vector2.One, Width - 2, Height - 2, Color.Violet * 0.15f);
+            Draw.HollowRect(position, Width, Height, Color.Violet * 0.5f);
         }
 
         public override void DebugRender(Camera camera)
@@ -83,6 +86,34 @@ namespace Celeste.Mod.SSMHelper.Entities
             Collider = detectHitbox;
             Draw.HollowRect(Collider, Color.MediumSeaGreen);
             Collider = collider;
+        }
+
+        public static void Load()
+        {
+            On.Celeste.BackdropRenderer.Render += On_BackdropRenderer_Render;
+        }
+
+        public static void Unload()
+        {
+            On.Celeste.BackdropRenderer.Render -= On_BackdropRenderer_Render;
+        }
+
+        private static void On_BackdropRenderer_Render(On.Celeste.BackdropRenderer.orig_Render orig, BackdropRenderer self, Scene scene)
+        {
+            orig(self, scene);
+            // render seeker crush zones like FG backdrops (to ignore lighting effects)
+            if (scene.Tracker.CountEntities<SeekerCrushZone>() > 0 && self == (scene as Level)?.Foreground)
+            {
+                self.StartSpritebatch(BlendState.AlphaBlend);
+                foreach (SeekerCrushZone zone in scene.Tracker.GetEntities<SeekerCrushZone>())
+                {
+                    if (zone.Visible)
+                    {
+                        zone.Render();
+                    }
+                }
+                self.EndSpritebatch();
+            }
         }
     }
 }
