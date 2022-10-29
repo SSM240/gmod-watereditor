@@ -15,6 +15,8 @@ namespace Celeste.Mod.SSMHelper.Entities
         // vanilla speed is 240
         public const float BoostSpeed = 220f;
 
+        public static readonly VirtualButton StopButton = Input.Dash;
+
         public static ParticleType P_BurstBlue;
         public static ParticleType P_BurstPink;
         public static ParticleType P_PinkAppear;
@@ -76,9 +78,9 @@ namespace Celeste.Mod.SSMHelper.Entities
                 return;
             }
             Player player = SceneAs<Level>().Tracker.GetEntity<Player>();
-            if (Input.Jump.Pressed && player.Dashes > 0)
+            if (StopButton.Pressed && player.Dashes > 0)
             {
-                Input.Jump.ConsumeBuffer();
+                StopButton.ConsumeBuffer();
                 IsStopped = true;
                 OnStop(player);
             }
@@ -88,7 +90,7 @@ namespace Celeste.Mod.SSMHelper.Entities
                 {
                     AimDirection = Input.GetAimVector();
                 }
-                if (!Input.Jump.Check)
+                if (!StopButton.Check)
                 {
                     IsStopped = false;
                     OnResume(player);
@@ -143,6 +145,8 @@ namespace Celeste.Mod.SSMHelper.Entities
         // easier than IL hooking a coroutine
         private IEnumerator BoostRoutine(Player player, Vector2 dir)
         {
+            DynamicData playerData = DynamicData.For(player);
+            playerData.Set("dashCooldownTimer", 999f);  // prevent dashing :catting:
             float angle = (-dir).Angle();
             while ((player.StateMachine.State == Player.StRedDash) && BoostingPlayer)
             {
@@ -155,6 +159,7 @@ namespace Celeste.Mod.SSMHelper.Entities
                 }
                 yield return null;
             }
+            playerData.Set("dashCooldownTimer", 0f);
             PlayerReleased();
             if (player.StateMachine.State == Player.StBoost)
             {
