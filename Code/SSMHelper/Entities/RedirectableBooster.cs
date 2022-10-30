@@ -19,8 +19,6 @@ namespace Celeste.Mod.SSMHelper.Entities
 
         public static VirtualButton StopButton => Input.Dash;
 
-        public static bool PlayerBeingBoosted = false;
-
         public static ParticleType P_BurstBlue;
         public static ParticleType P_BurstPink;
         public static ParticleType P_PinkAppear;
@@ -149,7 +147,6 @@ namespace Celeste.Mod.SSMHelper.Entities
         // easier than IL hooking a coroutine
         private IEnumerator BoostRoutine(Player player, Vector2 dir)
         {
-            PlayerBeingBoosted = true;
             float angle = (-dir).Angle();
             while ((player.StateMachine.State == Player.StRedDash) && BoostingPlayer)
             {
@@ -162,7 +159,6 @@ namespace Celeste.Mod.SSMHelper.Entities
                 }
                 yield return null;
             }
-            PlayerBeingBoosted = false;
             PlayerReleased();
             if (player.StateMachine.State == Player.StBoost)
             {
@@ -289,7 +285,7 @@ namespace Celeste.Mod.SSMHelper.Entities
         private static bool On_Player_CanDash(Func<Player, bool> orig, Player self)
         {
             bool result = orig(self);
-            if (PlayerBeingBoosted)
+            if (self.LastBooster is RedirectableBooster booster && booster.BoostingPlayer)
             {
                 result = false;
             }
