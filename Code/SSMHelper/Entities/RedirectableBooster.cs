@@ -1,10 +1,12 @@
 ﻿using Celeste.Mod.Entities;
 using Microsoft.Xna.Framework;
 using Monocle;
+using MonoMod.RuntimeDetour;
 using MonoMod.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Celeste.Mod.SSMHelper.Entities
 {
@@ -16,6 +18,8 @@ namespace Celeste.Mod.SSMHelper.Entities
         public const float BoostSpeed = 220f;
 
         public static VirtualButton StopButton => Input.Dash;
+
+        public static bool PlayerBeingBoosted = false;
 
         public static ParticleType P_BurstBlue;
         public static ParticleType P_BurstPink;
@@ -145,8 +149,7 @@ namespace Celeste.Mod.SSMHelper.Entities
         // easier than IL hooking a coroutine
         private IEnumerator BoostRoutine(Player player, Vector2 dir)
         {
-            DynamicData playerData = DynamicData.For(player);
-            playerData.Set("dashCooldownTimer", 999f);  // prevent dashing :catting:
+            PlayerBeingBoosted = true;
             float angle = (-dir).Angle();
             while ((player.StateMachine.State == Player.StRedDash) && BoostingPlayer)
             {
@@ -159,7 +162,7 @@ namespace Celeste.Mod.SSMHelper.Entities
                 }
                 yield return null;
             }
-            playerData.Set("dashCooldownTimer", 0f);
+            PlayerBeingBoosted = false;
             PlayerReleased();
             if (player.StateMachine.State == Player.StBoost)
             {
@@ -202,11 +205,16 @@ namespace Celeste.Mod.SSMHelper.Entities
             }
         }
 
+        private static BindingFlags publicInstance = BindingFlags.Public | BindingFlags.Instance;
+        private static Hook playerCanDashHook;
+        private static MethodInfo playerCanDashInfo = typeof(Player).GetProperty("CanDash", publicInstance).GetGetMethod();
+
         public static void Load()
         {
             On.Celeste.Booster.PlayerBoosted += On_Booster_PlayerBoosted;
             On.Celeste.Booster.Respawn += On_Booster_Respawn;
             On.Celeste.Booster.AppearParticles += On_Booster_AppearParticles;
+            playerCanDashHook = new Hook(playerCanDashInfo, On_Player_CanDash);
         }
 
         public static void Unload()
@@ -214,6 +222,8 @@ namespace Celeste.Mod.SSMHelper.Entities
             On.Celeste.Booster.PlayerBoosted -= On_Booster_PlayerBoosted;
             On.Celeste.Booster.Respawn -= On_Booster_Respawn;
             On.Celeste.Booster.AppearParticles -= On_Booster_AppearParticles;
+            playerCanDashHook?.Dispose();
+            playerCanDashHook = null;
         }
 
         public static void LoadParticles()
@@ -274,6 +284,16 @@ namespace Celeste.Mod.SSMHelper.Entities
                 return;
             }
             booster.AppearParticles();
+        }
+
+        private static bool On_Player_CanDash(Func<Player, bool> orig, Player self)
+        {
+            bool result = orig(self);
+            if (PlayerBeingBoosted)
+            {
+                result = false;
+            }
+            return result;
         }
     }
 }
