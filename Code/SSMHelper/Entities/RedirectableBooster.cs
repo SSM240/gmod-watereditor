@@ -15,7 +15,7 @@ namespace Celeste.Mod.SSMHelper.Entities
         // vanilla speed is 240
         public const float BoostSpeed = 220f;
 
-        public static readonly VirtualButton StopButton = Input.Dash;
+        public static VirtualButton StopButton => Input.Dash;
 
         public static ParticleType P_BurstBlue;
         public static ParticleType P_BurstPink;
