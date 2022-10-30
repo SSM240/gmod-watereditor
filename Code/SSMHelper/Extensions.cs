@@ -33,7 +33,7 @@ namespace Celeste.Mod.SSMHelper
         /// </summary>
         public static Vector2 WithMagnitude(this Vector2 vec, float mag)
         {
-            return Calc.AngleToVector(vec.Angle(), mag);
+            return vec * (mag / vec.Length());
         }
 
         // copied from Player class
