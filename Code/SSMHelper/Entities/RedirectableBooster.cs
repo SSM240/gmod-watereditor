@@ -211,6 +211,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             On.Celeste.Booster.Respawn += On_Booster_Respawn;
             On.Celeste.Booster.AppearParticles += On_Booster_AppearParticles;
             playerCanDashHook = new Hook(playerCanDashInfo, On_Player_CanDash);
+            On.Celeste.Player.RefillDash += On_Player_RefillDash;
         }
 
         public static void Unload()
@@ -220,6 +221,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             On.Celeste.Booster.AppearParticles -= On_Booster_AppearParticles;
             playerCanDashHook?.Dispose();
             playerCanDashHook = null;
+            On.Celeste.Player.RefillDash -= On_Player_RefillDash;
         }
 
         public static void LoadParticles()
@@ -290,6 +292,16 @@ namespace Celeste.Mod.SSMHelper.Entities
                 result = false;
             }
             return result;
+        }
+
+        private static bool On_Player_RefillDash(On.Celeste.Player.orig_RefillDash orig, Player self)
+        {
+            // this method does not affect refill gems for some reason so it works for me :)
+            if (self.LastBooster is RedirectableBooster booster && booster.BoostingPlayer)
+            {
+                return false;
+            }
+            return orig(self);
         }
     }
 }
