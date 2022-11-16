@@ -33,6 +33,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             tilesEnd.Alpha = 0f;
             Calc.PopRandom();
             Add(new TileInterceptor(tilesStart, highPriority: true));
+            Add(new LightOcclude());
         }
 
         public SeekerCrushZoneBlock(EntityData data, Vector2 offset)
