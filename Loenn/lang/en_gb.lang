@@ -11,5 +11,4 @@ entities.SSMHelper/MovingSolidThingy.placements.name.normal=Cursed Moving Solid 
 # ------------ triggers ------------
 
 triggers.SSMHelper/DashCancelTrigger.placements.name.normal=Dash Cancel Trigger
-triggers.SSMHelper/BinoStorageTrigger.placements.name.normal=Bino Storage Trigger
 triggers.SSMHelper/ChangeMaxCassetteTrigger.placements.name.normal=Change Max Cassette Beat
