@@ -1,5 +1,5 @@
 - Name: SSMHelper
-  Version: 1.1.2
+  Version: 1.1.3
   DLL: Code/SSMHelper.dll
   Dependencies:
     - Name: Everest
