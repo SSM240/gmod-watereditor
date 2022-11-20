@@ -71,6 +71,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             seeker.Bottom = Math.Min(seeker.Bottom, this.Bottom - 6f);
         }
 
+        // don't override since rendering is being done manually
         public new void Render()
         {
             base.Render();
