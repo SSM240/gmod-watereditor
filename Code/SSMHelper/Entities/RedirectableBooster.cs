@@ -256,6 +256,8 @@ namespace Celeste.Mod.SSMHelper.Entities
             orig(self, player, direction);
             if (self is RedirectableBooster booster)
             {
+                // refill dash manually (since we're hooking RefillDash)
+                player.Dashes = player.MaxDashes;
                 // replace with our own coroutine (easiest way to stop the particles)
                 booster.dashRoutine.Replace(booster.BoostRoutine(player, direction));
                 // reduce player speed
