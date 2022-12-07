@@ -145,9 +145,8 @@ namespace Celeste.Mod.SSMHelper.Entities
 
         // copypasted from vanilla but with different graphical behavior
         // easier than IL hooking a coroutine
-        private IEnumerator BoostRoutine(Player player, Vector2 dir)
+        private IEnumerator BoostRoutine(Player player)
         {
-            float angle = (-dir).Angle();
             while ((player.StateMachine.State == Player.StRedDash) && BoostingPlayer)
             {
                 SetSprite(player.Dashes);
@@ -155,6 +154,8 @@ namespace Celeste.Mod.SSMHelper.Entities
                 loopingSfx.Position = sprite.Position;
                 if (!IsStopped && Scene.OnInterval(0.02f))
                 {
+                    Vector2 dir = player.DashDir;
+                    float angle = (-dir).Angle();
                     (Scene as Level).ParticlesBG.Emit(particleType, 2, player.Center - dir * 3f + new Vector2(0f, -2f), new Vector2(3f, 3f), angle);
                 }
                 yield return null;
@@ -259,7 +260,7 @@ namespace Celeste.Mod.SSMHelper.Entities
                 // refill dash manually (since we're hooking RefillDash)
                 player.Dashes = player.MaxDashes;
                 // replace with our own coroutine (easiest way to stop the particles)
-                booster.dashRoutine.Replace(booster.BoostRoutine(player, direction));
+                booster.dashRoutine.Replace(booster.BoostRoutine(player));
                 // reduce player speed
                 player.Speed = player.Speed.WithMagnitude(BoostSpeed);
 
