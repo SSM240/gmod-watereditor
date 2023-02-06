@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\ForceCassetteBlockController.cs" />
     <Compile Include="Entities\SeekerStuff\SeekerCrushBarrier.cs" />
     <Compile Include="Entities\SeekerStuff\SeekerCrushBarrierRenderer.cs" />
     <Compile Include="Entities\SeekerStuff\SeekerCrushZoneBlock.cs" />
