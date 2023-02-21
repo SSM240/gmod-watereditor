@@ -84,6 +84,7 @@
     <Compile Include="SSMHelperModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StarjumpTilesetHelper.cs" />
+    <Compile Include="Triggers\TheoKillBoxTrigger.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

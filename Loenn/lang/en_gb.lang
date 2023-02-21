@@ -14,3 +14,4 @@ entities.SSMHelper/ForceCassetteBlockController.placements.description.normal=Al
 
 triggers.SSMHelper/DashCancelTrigger.placements.name.normal=Dash Cancel Trigger
 triggers.SSMHelper/ChangeMaxCassetteTrigger.placements.name.normal=Change Max Cassette Beat
+triggers.SSMHelper/TheoKillBoxTrigger.placements.name.normal=Theo Kill Box Trigger
