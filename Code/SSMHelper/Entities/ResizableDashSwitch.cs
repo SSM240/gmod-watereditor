@@ -127,7 +127,6 @@ namespace Celeste.Mod.SSMHelper.Entities
                   data.Bool("attachToSolid", true))
         { }
 
-        // again copied from FlagDashSwitch :)
         private static Sides SwitchSide(Sides side) => side switch
         {
             Sides.Up => Sides.Down,
@@ -364,7 +363,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             ILCursor cursor = new ILCursor(il);
             // basic technique here copied from max's helping hand lol
             // move to the start of where we want to skip
-            if (cursor.TryGotoNext(MoveType.After, instr => instr.MatchStfld<Entity>(nameof(Entity.Position))))
+            if (cursor.TryGotoNext(MoveType.After, instr => instr.MatchStfld<Entity>(nameof(Position))))
             {
                 // create another cursor and move to the end of where we want to skip
                 ILCursor cursorAfterParticles = cursor.Clone();
@@ -374,7 +373,7 @@ namespace Celeste.Mod.SSMHelper.Entities
                 {
                     // skip particle calls if this is a ResizableDashSwitch
                     cursor.Emit(OpCodes.Ldarg_0);
-                    cursor.EmitDelegate<Func<DashSwitch, bool>>(IsResizableDashSwitch);
+                    cursor.EmitDelegate(IsResizableDashSwitch);
                     cursor.Emit(OpCodes.Brtrue, cursorAfterParticles.Next);
                 }
             }
@@ -385,7 +384,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             {
                 cursor.Emit(OpCodes.Ldarg_0);
                 cursor.Emit(OpCodes.Ldc_R4, 0.8f);
-                cursor.EmitDelegate<Func<EventInstance, DashSwitch, float, EventInstance>>(ModifyVolume);
+                cursor.EmitDelegate(ModifyVolume);
             }
         }
 
@@ -407,9 +406,9 @@ namespace Celeste.Mod.SSMHelper.Entities
             while (cursor.TryGotoNext(MoveType.After, instr => instr.MatchCall(typeof(Audio), "Play")))
             {
                 cursor.Emit(OpCodes.Ldarg_0);
-                //cursor.EmitDelegate<Func<EventInstance, DashSwitch, EventInstance>>(ModifyPitch);
+                //cursor.EmitDelegate(ModifyPitch);
                 cursor.Emit(OpCodes.Ldc_R4, 0f);
-                cursor.EmitDelegate<Func<EventInstance, DashSwitch, float, EventInstance>>(ModifyVolume);
+                cursor.EmitDelegate(ModifyVolume);
             }
         }
 
