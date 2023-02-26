@@ -66,16 +66,16 @@ end
 
 function Ahorn.render(ctx::Ahorn.Cairo.CairoContext, entity::ResizableDashSwitch, room::Maple.Room)
     direction = get(entity.data, "orientation", "Up")
-    texture = "objects/temple/dashButton00.png"
+    texture = "objects/SSMHelper/bigDashSwitch/bigSwitch00.png"
 
     if direction == "Down"
-        Ahorn.drawSprite(ctx, texture, 9, 20, rot=-pi/2)
+        Ahorn.drawSprite(ctx, texture, 36, 12, rot=pi)
     elseif direction == "Up"
-        Ahorn.drawSprite(ctx, texture, 27, 7, rot=pi/2)
+        Ahorn.drawSprite(ctx, texture, 13, 4)
     elseif direction == "Right"
-        Ahorn.drawSprite(ctx, texture, 20, 25, rot=pi)
+        Ahorn.drawSprite(ctx, texture, 20, 4, rot=pi/2)
     elseif direction == "Left"
-        Ahorn.drawSprite(ctx, texture, 8, 7)
+        Ahorn.drawSprite(ctx, texture, 12, 28, rot=-pi/2)
     end
 end
 
