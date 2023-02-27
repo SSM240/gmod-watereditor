@@ -28,6 +28,7 @@ namespace Celeste.Mod.SSMHelper.Entities
         private Vector2 spriteOffset;
         private int width;
         private List<Image> switchImages = new();
+        private bool bounceInDreamBlock;
 
         private int widthTiles => width / 8;
 
@@ -80,7 +81,8 @@ namespace Celeste.Mod.SSMHelper.Entities
 
         #region Constructor stuff
 
-        public ResizableDashSwitch(Vector2 position, Sides side, bool persistent, EntityID id, int width, bool actLikeTouchSwitch, bool attachToSolid)
+        public ResizableDashSwitch(Vector2 position, Sides side, bool persistent, EntityID id, 
+          int width, bool actLikeTouchSwitch, bool attachToSolid, bool bounceInDreamBlock)
             : base(position, side, persistent, false, id, "default")
         {
             baseData = new DynamicData(typeof(DashSwitch), this);
@@ -114,6 +116,7 @@ namespace Celeste.Mod.SSMHelper.Entities
                     SceneAs<Level>().Session.SetFlag(FlagName);
                 };
             }
+            this.bounceInDreamBlock = bounceInDreamBlock;
 
             SurfaceSoundIndex = SurfaceIndex.DreamBlockInactive;
 
@@ -124,7 +127,7 @@ namespace Celeste.Mod.SSMHelper.Entities
         public ResizableDashSwitch(EntityData data, Vector2 offset, EntityID id)
             : this(data.Position + offset, SwitchSide(data.Enum("orientation", Sides.Up)),
                   data.Bool("persistent"), id, GetWidth(data), data.Bool("actLikeTouchSwitch", true),
-                  data.Bool("attachToSolid", true))
+                  data.Bool("attachToSolid", true), data.Bool("bounceInDreamBlock", true))
         { }
 
         private static Sides SwitchSide(Sides side) => side switch
@@ -159,6 +162,43 @@ namespace Celeste.Mod.SSMHelper.Entities
             if (pressed)
             {
                 Switch?.Activate();
+            }
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            if (Collidable && CollideFirst<Player>() is Player player)
+            {
+                if (player.StateMachine.State == Player.StDreamDash)
+                {
+                    bool collided = Side switch
+                    {
+                        Sides.Right => player.Speed.X > 0,
+                        Sides.Left => player.Speed.X < 0,
+                        Sides.Up => player.Speed.Y < 0,
+                        Sides.Down => player.Speed.Y > 0,
+                        _ => throw new InvalidOperationException("Dash switch direction is invalid.")
+                    };
+                    if (collided)
+                    {
+                        OnDashed(player, pressDirection);
+                        //player.Speed *= -1f;
+                        if (bounceInDreamBlock)
+                        {
+                            player.NaiveMove(-player.Speed * Engine.DeltaTime);  // compensate for speed to avoid exiting dream block too early
+                            bool horizontal = Side == Sides.Right || Side == Sides.Left;
+                            if (horizontal)
+                            {
+                                player.Speed.X *= -1f;
+                            }
+                            else
+                            {
+                                player.Speed.Y *= -1f;
+                            }
+                        }
+                    }
+                }
             }
         }
 

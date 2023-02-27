@@ -15,7 +15,8 @@ for i, dir in ipairs(directions) do
             orientation = dir,
             persistent = false,
             actLikeTouchSwitch = true,
-            attachToSolid = true
+            attachToSolid = true,
+            bounceInDreamBlock = true
         }
     }
 end
