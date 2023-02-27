@@ -41,9 +41,9 @@ end
 
 local rotations = {
     ["Up"] = 0,
-    ["Right"] = math.pi / 2,
+    ["Down"] = math.pi,
     ["Left"] = -math.pi / 2,
-    ["Down"]  = math.pi
+    ["Right"] = math.pi / 2
 }
 
 resizableDashSwitch.rotation = function(room, entity)
