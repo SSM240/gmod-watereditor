@@ -10,11 +10,16 @@ entities.SSMHelper/MovingSolidThingy.placements.name.normal=Cursed Moving Solid 
 entities.SSMHelper/ForceCassetteBlockController.placements.name.normal=Force Cassette Block Controller
 entities.SSMHelper/ForceCassetteBlockController.placements.description.normal=Always activate cassette blocks in this room, even if a cassette has previously been collected this session.
 
-# todo: add tooltips
 entities.SSMHelper/ResizableDashSwitch.placements.name.Up=Resizable Dash Switch (Up)
 entities.SSMHelper/ResizableDashSwitch.placements.name.Down=Resizable Dash Switch (Down)
 entities.SSMHelper/ResizableDashSwitch.placements.name.Left=Resizable Dash Switch (Left)
 entities.SSMHelper/ResizableDashSwitch.placements.name.Right=Resizable Dash Switch (Right)
+entities.SSMHelper/ResizableDashSwitch.attributes.description.orientation=Which way the switch should be facing.
+entities.SSMHelper/ResizableDashSwitch.attributes.description.persistent=If true, the switch will stay pressed, even if the player dies or leave the room.
+entities.SSMHelper/ResizableDashSwitch.attributes.description.actLikeTouchSwitch=If true, pressing all switches will activate switch gates.
+entities.SSMHelper/ResizableDashSwitch.attributes.description.attachToSolid=If true, the switch will attach to any solid it's placed on.
+entities.SSMHelper/ResizableDashSwitch.attributes.description.bounceInDreamBlock=If true, hitting the switch while in a dream block will bounce the player off of the switch.
+
 
 # ------------ triggers ------------
 
