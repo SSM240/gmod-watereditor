@@ -157,7 +157,9 @@ namespace Celeste.Mod.SSMHelper.Entities
         {
             base.Awake(scene);
             if (pressed)
+            {
                 Switch?.Activate();
+            }
         }
 
         public override void Render()
@@ -165,7 +167,9 @@ namespace Celeste.Mod.SSMHelper.Entities
             Vector2 oldPos = Position;
             Position += spriteOffset;
             foreach (Image image in switchImages)
+            {
                 image.Texture.DrawOnlyOutlineCentered(Position + image.Position, image.Rotation);
+            }
             base.Render();
             Position = oldPos;
         }
@@ -212,7 +216,9 @@ namespace Celeste.Mod.SSMHelper.Entities
         private void CreateSprite(int index)
         {
             foreach (Image image in switchImages)
+            {
                 Remove(image);
+            }
             switchImages.Clear();
 
             Vector2 startPos, posIncrement;
@@ -299,7 +305,9 @@ namespace Celeste.Mod.SSMHelper.Entities
         {
             player.UseRefill(twoDashes: false);
             if (Switch?.Activate() == true)
+            {
                 SoundEmitter.Play(SFX.game_gen_touchswitch_last_oneshot);
+            }
             Add(new Coroutine(PlayPushedAnimation()));
             AddLightningSprite(player.Center);
 
@@ -353,7 +361,9 @@ namespace Celeste.Mod.SSMHelper.Entities
             On.Celeste.DashSwitch.orig_OnDashed orig, DashSwitch self, Player player, Vector2 direction)
         {
             if (self is ResizableDashSwitch dashSwitch && !dashSwitch.pressed && direction == dashSwitch.pressDirection)
+            {
                 dashSwitch.OnPressed(player, direction);
+            }
 
             return orig(self, player, direction);
         }
