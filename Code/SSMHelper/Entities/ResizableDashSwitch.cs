@@ -29,6 +29,7 @@ namespace Celeste.Mod.SSMHelper.Entities
         private int width;
         private List<Image> switchImages = new();
         private bool bounceInDreamBlock;
+        private StaticMover staticMover;
 
         private int widthTiles => width / 8;
 
@@ -99,7 +100,7 @@ namespace Celeste.Mod.SSMHelper.Entities
 
             if (attachToSolid)
             {
-                Add(new StaticMover
+                Add(staticMover = new StaticMover
                 {
                     SolidChecker = IsRiding,
                     OnMove = OnMove,
@@ -350,6 +351,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             }
             Add(new Coroutine(PlayPushedAnimation()));
             AddLightningSprite(player.Center);
+            staticMover.TriggerPlatform();
 
             // add particles
             Level level = SceneAs<Level>();
