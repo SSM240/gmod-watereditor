@@ -108,6 +108,7 @@ namespace Celeste.Mod.SSMHelper.Entities
                     OnShake = OnShake,
                     OnEnable = OnEnable,
                 });
+                Collider = new SolidStaticMoverHitbox(Hitbox, staticMover);
             }
             if (actLikeTouchSwitch)
             {

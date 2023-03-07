@@ -77,6 +77,7 @@
     <Compile Include="Entities\ForceCassetteBlockController.cs" />
     <Compile Include="Entities\MovingSolidThingy.cs" />
     <Compile Include="Entities\ResizableDashSwitch.cs" />
+    <Compile Include="Entities\SolidStaticMoverHitbox.cs" />
     <Compile Include="Entities\ReverseKillbox.cs" />
     <Compile Include="Entities\ZeroGravBoundsController.cs" />
     <Compile Include="Extensions.cs" />
