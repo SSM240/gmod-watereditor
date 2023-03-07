@@ -351,7 +351,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             }
             Add(new Coroutine(PlayPushedAnimation()));
             AddLightningSprite(player.Center);
-            staticMover.TriggerPlatform();
+            staticMover?.TriggerPlatform();
 
             // add particles
             Level level = SceneAs<Level>();
