@@ -30,7 +30,7 @@ namespace Celeste.Mod.SSMHelper
         {
             StarjumpTilesetHelper.Unload();
             ReverseKillbox.Unload();
-            ResizableDashSwitch.Load();
+            ResizableDashSwitch.Unload();
             //ChangeMaxCassetteTrigger.Unload();
         }
 
