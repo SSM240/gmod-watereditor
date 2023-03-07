@@ -7,7 +7,7 @@ using MonoMod.Utils;
 namespace Celeste.Mod.SSMHelper.Entities
 {
     /// <summary>
-    /// Forces the parent platform of the static mover to ignore this entity in collision checks.
+    /// Forces the parent platform of the static mover to ignore this collider in collision checks.
     /// </summary>
     public class SolidStaticMoverHitbox : Hitbox
     {
