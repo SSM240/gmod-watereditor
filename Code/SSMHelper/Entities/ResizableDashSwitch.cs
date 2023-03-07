@@ -106,6 +106,7 @@ namespace Celeste.Mod.SSMHelper.Entities
                     OnMove = OnMove,
                     OnAttach = OnAttach,
                     OnShake = OnShake,
+                    OnEnable = OnEnable,
                 });
             }
             if (actLikeTouchSwitch)
@@ -248,6 +249,12 @@ namespace Celeste.Mod.SSMHelper.Entities
         private new void OnShake(Vector2 amount)
         {
             spriteOffset += amount;
+        }
+
+        private void OnEnable()
+        {
+            Active = Visible = true;
+            Collidable = !pressed;
         }
 
         #endregion
