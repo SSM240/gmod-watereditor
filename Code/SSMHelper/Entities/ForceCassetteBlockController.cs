@@ -22,8 +22,7 @@ namespace Celeste.Mod.SSMHelper.Entities
                 cbm.OnLevelStart();
                 return;
             }
-            bool shouldCreateCassetteManager = DynamicData.For(level).Get<bool>("ShouldCreateCassetteManager");
-            if (level.HasCassetteBlocks && !shouldCreateCassetteManager)
+            if (level.HasCassetteBlocks && !level.ShouldCreateCassetteManager)
             {
                 cbm = new CassetteBlockManager();
                 level.Add(cbm);
