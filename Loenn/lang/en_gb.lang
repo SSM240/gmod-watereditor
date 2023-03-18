@@ -7,9 +7,11 @@ mods.SSMHelper.name=SSM Helper
 entities.SSMHelper/ReverseKillbox.placements.name.normal=Reverse Killbox
 entities.SSMHelper/ZeroGravBoundsController.placements.name.normal=Zero Grav Bounds Controller
 entities.SSMHelper/MovingSolidThingy.placements.name.normal=Cursed Moving Solid Thingy
+entities.SSMHelper/ForceCassetteBlockController.placements.name.normal=Force Cassette Block Controller
+entities.SSMHelper/ForceCassetteBlockController.placements.description.normal=Always activate cassette blocks in this room, even if a cassette has previously been collected this session.
 
 # ------------ triggers ------------
 
 triggers.SSMHelper/DashCancelTrigger.placements.name.normal=Dash Cancel Trigger
-triggers.SSMHelper/BinoStorageTrigger.placements.name.normal=Bino Storage Trigger
 triggers.SSMHelper/ChangeMaxCassetteTrigger.placements.name.normal=Change Max Cassette Beat
+triggers.SSMHelper/TheoKillBoxTrigger.placements.name.normal=Theo Kill Box Trigger
