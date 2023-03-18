@@ -4,7 +4,7 @@
   <PropertyGroup>
     <TargetFrameworks>net452</TargetFrameworks>
     <AssemblyName>SSMHelper</AssemblyName>
-    <RootNamespace>Celeste.Mod.Example</RootNamespace>
+    <RootNamespace>Celeste.Mod.SSMHelper</RootNamespace>
     <LangVersion>preview</LangVersion>
     <OutputPath>..</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <Choose>
-    <When Condition="'$(OS)' != 'Windows_NT' Or Exists('$(CELESTEGAMEPATH)\FNA.dll')">
+    <When Condition="'$(OS)' != 'Windows_NT' Or Exists('$(CELESTEGAMEPATH)\BuildIsFNA.txt')">
       <ItemGroup>
         <Reference Include="FNA" HintPath="$(CELESTEGAMEPATH)\FNA.dll" />
       </ItemGroup>
