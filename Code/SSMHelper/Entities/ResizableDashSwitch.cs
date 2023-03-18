@@ -24,7 +24,6 @@ namespace Celeste.Mod.SSMHelper.Entities
         public static ParticleType P_Fizzle;
         public static ParticleType P_Shatter;
 
-        private DynamicData baseData;
         private Vector2 spriteOffset;
         private int width;
         private List<Image> switchImages = new();
@@ -44,49 +43,12 @@ namespace Celeste.Mod.SSMHelper.Entities
 
         #endregion
 
-        #region Base class fields
-
-        private Vector2 pressedTarget
-        {
-            get => baseData.Get<Vector2>("pressedTarget");
-            set => baseData.Set("pressedTarget", value);
-        }
-        private float startY
-        {
-            get => baseData.Get<float>("startY");
-            set => baseData.Set("startY", value);
-        }
-        private Sprite sprite
-        {
-            get => baseData.Get<Sprite>("sprite");
-            set => baseData.Set("sprite", value);
-        }
-        private bool persistent
-        {
-            get => baseData.Get<bool>("persistent");
-            set => baseData.Set("persistent", value);
-        }
-        private bool pressed
-        {
-            get => baseData.Get<bool>("pressed");
-            set => baseData.Set("pressed", value);
-        }
-        private Vector2 pressDirection
-        {
-            get => baseData.Get<Vector2>("pressDirection");
-            set => baseData.Set("pressDirection", value);
-        }
-        private string FlagName => baseData.Get<string>("FlagName");
-
-        #endregion
-
         #region Constructor stuff
 
         public ResizableDashSwitch(Vector2 position, Sides side, bool persistent, EntityID id, 
           int width, bool actLikeTouchSwitch, bool attachToSolid, bool bounceInDreamBlock)
             : base(position, side, persistent, false, id, "default")
         {
-            baseData = new DynamicData(typeof(DashSwitch), this);
             Side = side;
             this.width = width;
             if (side == Sides.Up || side == Sides.Down)
