@@ -314,20 +314,26 @@ namespace Celeste.Mod.SSMHelper.Entities
 
         private void OnPressed(Player player, Vector2 direction)
         {
-            player.UseRefill(twoDashes: false);
+            player?.UseRefill(twoDashes: false);
             if (Switch?.Activate() == true)
             {
                 SoundEmitter.Play(SFX.game_gen_touchswitch_last_oneshot);
             }
             Add(new Coroutine(PlayPushedAnimation()));
-            AddLightningSprite(player.Center);
             staticMover?.TriggerPlatform();
+            if (player != null)
+            {
+                AddLightningSprite(player.Center);
+            }
 
             // add particles
             Level level = SceneAs<Level>();
             float rotation = SwitchRotation - Calc.QuarterCircle;
-            Vector2 shatterPos = player.Center + direction * 8f;
-            level.ParticlesFG.Emit(P_Shatter, Calc.Random.Range(3, 4), shatterPos, Vector2.Zero, rotation);
+            if (player != null)
+            {
+                Vector2 shatterPos = player.Center + direction * 8f;
+                level.ParticlesFG.Emit(P_Shatter, Calc.Random.Range(3, 4), shatterPos, Vector2.Zero, rotation);
+            }
             Vector2 fizzlePos = Center + direction * 4f;
             int fizzleCount = Math.Max(3 * widthTiles, 16);
             level.ParticlesFG.Emit(P_Fizzle, fizzleCount, fizzlePos, direction.Perpendicular() * width / 2, rotation);
