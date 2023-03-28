@@ -8,6 +8,7 @@
     <LangVersion>preview</LangVersion>
     <OutputPath>..</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <CelesteGamePath Condition="'$(CELESTEGAMEPATH)' == ''">..\..\..\..</CelesteGamePath>
   </PropertyGroup>
 
@@ -18,12 +19,20 @@
   </ItemDefinitionGroup>
 
   <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute">
+      <_Parameter1>Celeste</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MonoMod" Version="21.08.19.01" />
     <PackageReference Include="MonoMod.RuntimeDetour" Version="21.08.19.01" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Celeste" HintPath="$(CELESTEGAMEPATH)\Celeste.exe" />
+    <Reference Include="Celeste">
+      <HintPath>lib-stripped\Celeste-nstrip.exe</HintPath>
+    </Reference>
     <Reference Include="MMHOOK_Celeste" HintPath="$(CELESTEGAMEPATH)\MMHOOK_Celeste.dll" />
     <Reference Include="YamlDotNet" HintPath="$(CELESTEGAMEPATH)\YamlDotNet.dll" />
   </ItemGroup>
