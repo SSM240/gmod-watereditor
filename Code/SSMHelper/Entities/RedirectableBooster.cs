@@ -174,7 +174,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             currentSprite = index;
         }
 
-        private void AppearParticles()
+        private new void AppearParticles()
         {
             ParticleSystem particlesBG = SceneAs<Level>().ParticlesBG;
             for (int i = 0; i < 360; i += 30)
