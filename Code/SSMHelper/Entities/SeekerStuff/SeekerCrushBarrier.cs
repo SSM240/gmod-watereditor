@@ -20,18 +20,9 @@ namespace Celeste.Mod.SSMHelper.Entities
         private Color removingFlashColor;
         private bool particlesVisible = true;
 
-        private DynamicData baseData;
-        private List<Vector2> particles => baseData.Get<List<Vector2>>("particles");
-        private float solidifyDelay // why is this private -_-
-        {
-            get => baseData.Get<float>("solidifyDelay");
-            set => baseData.Set("solidifyDelay", value);
-        }
-
         public SeekerCrushBarrier(EntityData data, Vector2 offset)
             : base(data, offset)
         {
-            baseData = new DynamicData(typeof(SeekerBarrier), this);
             Collidable = true;
             SurfaceSoundIndex = SurfaceIndex.DreamBlockActive;
 

@@ -35,27 +35,8 @@ namespace Celeste.Mod.SSMHelper.Entities
 
         private BoosterDashAssistArrow dashAssistArrow;
 
-        #region Base class fields/methods
-        private readonly DynamicData baseData;
-
-        public Sprite sprite
-        {
-            get => baseData.Get<Sprite>("sprite");
-            set => baseData.Set("sprite", value);
-        }
-        public ParticleType particleType
-        {
-            get => baseData.Get<ParticleType>("particleType");
-            set => baseData.Set("particleType", value);
-        }
-        public SoundSource loopingSfx => baseData.Get<SoundSource>("loopingSfx");
-        public Coroutine dashRoutine => baseData.Get<Coroutine>("dashRoutine");
-        public Wiggler wiggler => baseData.Get<Wiggler>("wiggler");
-        #endregion
-
         public RedirectableBooster(EntityData data, Vector2 offset) : base(data.Position + offset, true)
         {
-            baseData = new DynamicData(typeof(Booster), this);
 
             Add(dashAssistArrow = new BoosterDashAssistArrow());
 
