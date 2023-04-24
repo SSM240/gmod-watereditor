@@ -20,6 +20,9 @@ entities.SSMHelper/ResizableDashSwitch.attributes.description.actLikeTouchSwitch
 entities.SSMHelper/ResizableDashSwitch.attributes.description.attachToSolid=If true, the switch will attach to any solid it's placed on.
 entities.SSMHelper/ResizableDashSwitch.attributes.description.bounceInDreamBlock=If true, hitting the switch while in a dream block will bounce the player off of the switch.
 
+entities.SSMHelper/HoldableDashTrigger.placements.name.normal=Dash With Holdable Trigger
+entities.SSMHelper/HoldableDashTrigger.attributes.description.mode="Toggle" will set or clear a session flag that allows dashing anywhere.\n"OnStay" will force the ability to be on/off while inside the trigger, regardless of what the session flag is set to.
+
 
 # ------------ triggers ------------
 

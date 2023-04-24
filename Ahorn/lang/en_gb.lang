@@ -1,0 +1,2 @@
+# Dash With Holdable Trigger
+placements.triggers.SJ2021/HoldableDashTrigger.tooltips.mode="Toggle" will set or clear a session flag that allows dashing anywhere.\n"OnStay" will force the ability to be on/off while inside the trigger, regardless of what the session flag is set to.
