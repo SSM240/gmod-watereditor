@@ -11,7 +11,7 @@ namespace Celeste.Mod.SSMHelper.Entities
     {
         private static readonly Vector2 renderOffset = new(0, -8);
         private static readonly Color outlineColor = Calc.HexToColor("081e08");
-        private static readonly Color renderColor = Calc.HexToColor("a3ffa3");
+        private static readonly Color renderColor = Calc.HexToColor("83dc83");
 
         private Vector2 renderPos;
 
