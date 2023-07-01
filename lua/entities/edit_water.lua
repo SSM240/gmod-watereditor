@@ -7,10 +7,6 @@ ENT.AdminOnly = true
 ENT.PrintName = "Water Editor"
 ENT.Category = "Editors"
 
-function ENT:OnEntityCreated()
-    
-end
-
 function ENT:Initialize()
 
 	BaseClass.Initialize(self)
@@ -24,6 +20,8 @@ function ENT:SetupDataTables()
     -- allWaterMaterials = nil
     
     -- populate allWaterMaterials with every water material in the map and their properties
+    -- TODO: reconcile this with the commands so this does actually only ever run once
+    -- also figure out whether this stuff actually needs to run in the server realm
     if not allWaterMaterials then
         allWaterMaterials = {}  -- intentionally global
         for _, ent in ipairs(ents:GetAll()) do

@@ -131,6 +131,7 @@ end
 
 local function WaterFog_ListMaterials(ply, cmd, args, str)
     -- all this to ignore the alpha channel -_-
+    -- yes i could just trim off " 255" from the end but i don't feel confident that it'll always work
     local function ColorVectorToString(vector)
         local color = vector:ToColor()
         if not color.r then return "nil" end
@@ -138,7 +139,8 @@ local function WaterFog_ListMaterials(ply, cmd, args, str)
     end
     WaterFog_Initialize()
     for materialName, tbl in pairs(waterMaterials) do
-        print(materialName.. "\n  defaults:  color "..ColorVectorToString(tbl.orig.fogColor)..",  start "..tbl.orig.fogStart..",  end "..tbl.orig.fogEnd.."\n")
+        print(materialName.. "\n  defaults:  color "..ColorVectorToString(tbl.orig.fogColor)
+            .." ("..tbl.orig.fogColor.."),  start "..tbl.orig.fogStart..",  end "..tbl.orig.fogEnd.."\n")
     end
 end
 
