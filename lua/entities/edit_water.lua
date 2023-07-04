@@ -93,7 +93,6 @@ function ENT:GetWaterMaterialTable()
         local result = {}
         for materialName, tbl in pairs(allWaterMaterials) do
             if tbl.aboveWater == aboveWater then
-                if SERVER then print(":3") end
                 result[materialName] = tbl
             end
         end
