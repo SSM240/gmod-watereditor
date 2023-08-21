@@ -14,5 +14,6 @@ entities.SSMHelper/DelayedUltraIndicatorController.placements.name.normal=Delaye
 # ------------ triggers ------------
 
 triggers.SSMHelper/DashCancelTrigger.placements.name.normal=Dash Cancel Trigger
+triggers.SSMHelper/DashCancelTrigger.attributes.description.playSound=Makes a sound play when the dash is canceled.
 triggers.SSMHelper/ChangeMaxCassetteTrigger.placements.name.normal=Change Max Cassette Beat
 triggers.SSMHelper/TheoKillBoxTrigger.placements.name.normal=Theo Kill Box Trigger
