@@ -13,6 +13,8 @@ function ENT:Initialize()
 
 	self:SetMaterial("gmod/edit_water")
 
+    print(self:GetClass())
+
 end
 
 function ENT:SetupDataTables()
@@ -192,6 +194,21 @@ function ENT:OnChangeWaterMaterial(_, oldValue, newValue)
             if self:GetEditWaterFogEnd() then
                 material:SetFloat("$fogend", self:GetWaterFogEnd())
             end
+        end
+    end
+end
+
+function ENT:ForceApplyProperties()
+    for materialName, tbl in pairs(self:GetWaterMaterialTable()) do
+        local material = Material(materialName)
+        if self:GetEditWaterFogColor() then
+            material:SetVector("$fogcolor", self:GetWaterFogColor())
+        end
+        if self:GetEditWaterFogStart() then
+            material:SetFloat("$fogstart", self:GetWaterFogStart())
+        end
+        if self:GetEditWaterFogEnd() then
+            material:SetFloat("$fogend", self:GetWaterFogEnd())
         end
     end
 end
