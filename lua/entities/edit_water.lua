@@ -22,7 +22,6 @@ function ENT:SetupDataTables()
     -- allWaterMaterials = nil
     
     -- populate allWaterMaterials with every water material in the map and their properties
-    -- TODO: reconcile this with the commands so this does actually only ever run once
     if not allWaterMaterials then
         allWaterMaterials = {}  -- intentionally global
         for _, ent in ipairs(ents:GetAll()) do

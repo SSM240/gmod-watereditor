@@ -1,17 +1,15 @@
-waterMaterials = waterMaterials or {}
-local initialized = initialized or false
-
 function WaterFog_Initialize()
-    if not initialized then
-        -- populate waterMaterials with every water material in the map and their properties
+    -- populate allWaterMaterials with every water material in the map and their properties
+    if not allWaterMaterials then
+        allWaterMaterials = {}  -- intentionally global
         for _, ent in ipairs(ents:GetAll()) do
             for _, brush in ipairs(ent:GetBrushSurfaces() or {}) do
                 if brush:IsWater() then
                     local material = brush:GetMaterial()
                     local materialName = material:GetName()
-                    if not waterMaterials[materialName] then
-                        waterMaterials[materialName] = {
-                            aboveWater = material:GetInt("$abovewater"),
+                    if not allWaterMaterials[materialName] then
+                        allWaterMaterials[materialName] = {
+                            aboveWater = tobool(material:GetInt("$abovewater")),
                             orig = {
                                 fogColor = material:GetVector("$fogcolor"),
                                 fogStart = material:GetFloat("$fogstart"),
@@ -21,7 +19,6 @@ function WaterFog_Initialize()
                     end
                 end
             end
-        initialized = true
         end
     end
 
@@ -37,8 +34,8 @@ function WaterFog_Initialize()
     --     print("[Error] "..cvarMaterialName.." does not have any water material properties")
     --     return
     -- end
-    -- if not waterMaterials[cvarMaterialName] then
-    --     waterMaterials[cvarMaterialName] = {
+    -- if not allWaterMaterials[cvarMaterialName] then
+    --     allWaterMaterials[cvarMaterialName] = {
     --         orig = {
     --             fogColor = fogColor,
     --             fogStart = fogStart,
@@ -52,10 +49,10 @@ local function GetMaterials()
     WaterFog_Initialize()
     local cvarMaterialName = GetConVar("waterfog_material_override"):GetString()
     local cvarMaterial = Material(cvarMaterialName)
-    -- return waterMaterials if the cvar is not a valid texture
-    if Material(cvarMaterialName):IsError() then return waterMaterials end
+    -- return allWaterMaterials if the cvar is not a valid texture
+    if Material(cvarMaterialName):IsError() then return allWaterMaterials end
     -- otherwise, return table with only one entry
-    return { [cvarMaterialName] = waterMaterials[cvarMaterialName] }
+    return { [cvarMaterialName] = allWaterMaterials[cvarMaterialName] }
 end
 
 local function WaterFog_CmdColor(ply, cmd, args, str)
@@ -138,7 +135,7 @@ local function WaterFog_ListMaterials(ply, cmd, args, str)
         return math.floor(color.r).." "..math.floor(color.g).." "..math.floor(color.b)
     end
     WaterFog_Initialize()
-    for materialName, tbl in pairs(waterMaterials) do
+    for materialName, tbl in pairs(allWaterMaterials) do
         print(materialName.. "\n  defaults:  color "..ColorVectorToString(tbl.orig.fogColor)
             .." ("..tbl.orig.fogColor.."),  start "..tbl.orig.fogStart..",  end "..tbl.orig.fogEnd.."\n")
     end
