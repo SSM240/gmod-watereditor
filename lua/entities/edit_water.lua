@@ -230,7 +230,5 @@ end
 
 -- This edits something global - so always network - even when not in PVS
 function ENT:UpdateTransmitState()
-
 	return TRANSMIT_ALWAYS
-
 end
