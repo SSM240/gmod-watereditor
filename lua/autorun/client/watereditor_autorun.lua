@@ -21,28 +21,6 @@ function WaterFog_Initialize()
             end
         end
     end
-
-    -- always check the cvar override material
-    -- TODO: probably move this logic into a cvar change callback
-    -- local cvarMaterialName = GetConVar("waterfog_material_override"):GetString()
-    -- local cvarMaterial = Material(cvarMaterialName)
-    -- if cvarMaterial:IsError() then return end
-    -- local fogColor = cvarMaterial:GetVector("$fogcolor")
-    -- local fogStart = cvarMaterial:GetFloat("$fogstart")
-    -- local fogEnd = cvarMaterial:GetFloat("$fogend")
-    -- if not (fogColor or fogStart or fogEnd) then
-    --     print("[Error] "..cvarMaterialName.." does not have any water material properties")
-    --     return
-    -- end
-    -- if not allWaterMaterials[cvarMaterialName] then
-    --     allWaterMaterials[cvarMaterialName] = {
-    --         orig = {
-    --             fogColor = fogColor,
-    --             fogStart = fogStart,
-    --             fogEnd = fogEnd,
-    --         }
-    --     }
-    -- end
 end
 
 local function GetMaterials()
@@ -188,5 +166,3 @@ end
 CreateClientConVar(
     "waterfog_material_override", "nil", false, false, 
     "If set to a valid material, waterfog commands will only change that material\n   (use waterfog_list_materials to see all known water materials in current map)")
-
-cvars.AddChangeCallback("waterfog_material_override", function(a,b,c) print("ffffffffffff") end, "test")

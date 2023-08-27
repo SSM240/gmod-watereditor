@@ -65,7 +65,7 @@ function ENT:SetupDataTables()
         self:SetWaterFogStart(0)
 
         self:SetEditWaterFogEnd(true)
-        self:SetWaterFogEnd(2000)
+        self:SetWaterFogEnd(3000)
 
         self:SetEditWaterFogColor(true)
         -- TODO: figure out how to make this default to one of the normal material colors?
