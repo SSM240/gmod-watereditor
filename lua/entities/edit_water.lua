@@ -21,7 +21,6 @@ function ENT:SetupDataTables()
     
     -- populate allWaterMaterials with every water material in the map and their properties
     -- TODO: reconcile this with the commands so this does actually only ever run once
-    -- also figure out whether this stuff actually needs to run in the server realm
     if not allWaterMaterials then
         allWaterMaterials = {}  -- intentionally global
         for _, ent in ipairs(ents:GetAll()) do
@@ -88,7 +87,7 @@ function ENT:SetupDataTables()
         self:SetWaterFogEnd(2000)
 
         self:SetEditWaterFogColor(true)
-        -- TODO: figure out how to make this default to one of the normal colors
+        -- TODO: figure out how to make this default to one of the normal material colors?
         self:SetWaterFogColor(Vector(0.027, 0.227, 0.259))
 
         self:SetWaterMaterial("All")
@@ -212,9 +211,7 @@ function ENT:OnRemove()
     end
 end
 
---
 -- This edits something global - so always network - even when not in PVS
---
 function ENT:UpdateTransmitState()
 
 	return TRANSMIT_ALWAYS
