@@ -1,7 +1,8 @@
 AddCSLuaFile()
 
 properties.Add("watereditor_refresh", {
-    MenuLabel = "Force Apply Properties",
+    MenuLabel = "#watereditor.properties.refresh",
+    MenuIcon = "icon16/water.png",
     Order = 90000,
     PrependSpacer = true,
     Filter = function(self, ent)

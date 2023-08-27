@@ -4,7 +4,7 @@ DEFINE_BASECLASS("base_edit")
 ENT.Spawnable = true
 ENT.AdminOnly = true
 
-ENT.PrintName = "Water Editor"
+ENT.PrintName = "#watereditor.name"
 ENT.Category = "Editors"
 
 function ENT:Initialize()
@@ -22,9 +22,9 @@ function ENT:SetupDataTables()
 
     local function GetComboOptions()
         local tbl = {
-            ["All"] = "All",
-            ["Above water"] = "Above water",
-            ["Below water"] = "Below water"
+            ["#watereditor.watermaterialoptions.all"] = "All",
+            ["#watereditor.watermaterialoptions.abovewater"] = "Above water",
+            ["#watereditor.watermaterialoptions.belowwater"] = "Below water"
         }
         for materialName, _ in pairs(allWaterMaterials) do
             tbl[materialName] = materialName
@@ -32,26 +32,26 @@ function ENT:SetupDataTables()
         return tbl
     end
 
-    self:NetworkVar("Bool", 0, "EditWaterFogStart", {KeyName = "editwaterfogstart", Edit = {type = "Boolean", title = "Modify Water Fog Start?", order = 1}})
+    self:NetworkVar("Bool", 0, "EditWaterFogStart", {KeyName = "editwaterfogstart", Edit = {type = "Boolean", title = "#watereditor.editwaterfogstart", order = 1}})
     self:NetworkVarNotify("EditWaterFogStart", self.OnChangeEditWaterFogStart)
 
-    self:NetworkVar("Float", 0, "WaterFogStart", {KeyName = "waterfogstart", Edit = {type = "Float", title = "Water Fog Start", min = -10000, max = 10000, order = 2}})
+    self:NetworkVar("Float", 0, "WaterFogStart", {KeyName = "waterfogstart", Edit = {type = "Float", title = "#watereditor.waterfogstart", min = -10000, max = 10000, order = 2}})
     self:NetworkVarNotify("WaterFogStart", self.OnChangeWaterFogStart)
 
-    self:NetworkVar("Bool", 1, "EditWaterFogEnd", {KeyName = "editwaterfogEnd", Edit = {type = "Boolean", title = "Modify Water Fog End?", order = 3}})
+    self:NetworkVar("Bool", 1, "EditWaterFogEnd", {KeyName = "editwaterfogEnd", Edit = {type = "Boolean", title = "#watereditor.editwaterfogend", order = 3}})
     self:NetworkVarNotify("EditWaterFogEnd", self.OnChangeEditWaterFogEnd)
 
-    self:NetworkVar("Float", 1, "WaterFogEnd", {KeyName = "waterfogend", Edit = {type = "Float", title = "Water Fog End", min = 0, max = 10000, order = 4}})
+    self:NetworkVar("Float", 1, "WaterFogEnd", {KeyName = "waterfogend", Edit = {type = "Float", title = "#watereditor.waterfogend", min = 0, max = 10000, order = 4}})
     self:NetworkVarNotify("WaterFogEnd", self.OnChangeWaterFogEnd)
 
-    self:NetworkVar("Bool", 2, "EditWaterFogColor", {KeyName = "editwaterfogcolor", Edit = {type = "Boolean", title = "Modify Water Fog Color?", order = 5}})
+    self:NetworkVar("Bool", 2, "EditWaterFogColor", {KeyName = "editwaterfogcolor", Edit = {type = "Boolean", title = "#watereditor.editwaterfogcolor", order = 5}})
     self:NetworkVarNotify("EditWaterFogColor", self.OnChangeEditWaterFogColor)
 
-    self:NetworkVar("Vector", 0, "WaterFogColor", {KeyName = "waterfogcolor", Edit = {type = "VectorColor", title = "Water Fog Color", order = 6}})
+    self:NetworkVar("Vector", 0, "WaterFogColor", {KeyName = "waterfogcolor", Edit = {type = "VectorColor", title = "#watereditor.waterfogcolor", order = 6}})
     self:NetworkVarNotify("WaterFogColor", self.OnChangeWaterFogColor)
 
     self:NetworkVar("String", 0, "WaterMaterial", 
-        {KeyName = "watermaterial", Edit = {type = "Combo", title = "Water Material(s) to Modify", text = "All", order = 7, values = GetComboOptions()}})
+        {KeyName = "watermaterial", Edit = {type = "Combo", title = "#watereditor.watermaterial", text = "All", order = 7, values = GetComboOptions()}})
     self:NetworkVarNotify("WaterMaterial", self.OnChangeWaterMaterial)
     
 
