@@ -8,13 +8,9 @@ ENT.PrintName = "Water Editor"
 ENT.Category = "Editors"
 
 function ENT:Initialize()
-
 	BaseClass.Initialize(self)
 
 	self:SetMaterial("gmod/edit_water")
-
-    print(self:GetClass())
-
 end
 
 function ENT:SetupDataTables()
