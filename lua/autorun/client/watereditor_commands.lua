@@ -1,3 +1,6 @@
+WaterEdit = WaterEdit or {}
+local WE = WaterEdit
+
 local function GetMaterials()
     WaterEdit_Initialize()
     local cvarMaterialName = GetConVar("wateredit_material_override"):GetString()

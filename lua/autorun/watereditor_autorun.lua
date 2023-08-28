@@ -1,4 +1,5 @@
-WE = WE or {}
+WaterEdit = WaterEdit or {}
+local WE = WaterEdit
 
 function WaterEdit_Initialize()
     -- populate WE.allWaterMaterials with every water material in the map and their properties

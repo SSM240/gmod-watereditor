@@ -1,4 +1,8 @@
 AddCSLuaFile()
+
+WaterEdit = WaterEdit or {}
+local WE = WaterEdit
+
 DEFINE_BASECLASS("base_edit")
 
 ENT.Spawnable = true
