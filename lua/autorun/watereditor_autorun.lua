@@ -3,7 +3,7 @@ WE = WE or {}
 function WaterEdit_Initialize()
     -- populate WE.allWaterMaterials with every water material in the map and their properties
     if not WE.allWaterMaterials then
-        WE.allWaterMaterials = {}  -- intentionally global
+        WE.allWaterMaterials = {}
         for _, ent in ipairs(ents:GetAll()) do
             for _, brush in ipairs(ent:GetBrushSurfaces() or {}) do
                 if brush:IsWater() then
