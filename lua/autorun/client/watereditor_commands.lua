@@ -2,10 +2,10 @@ local function GetMaterials()
     WaterEdit_Initialize()
     local cvarMaterialName = GetConVar("wateredit_material_override"):GetString()
     local cvarMaterial = Material(cvarMaterialName)
-    -- return allWaterMaterials if the cvar is not a valid texture
-    if Material(cvarMaterialName):IsError() then return allWaterMaterials end
+    -- return WE.allWaterMaterials if the cvar is not a valid texture
+    if Material(cvarMaterialName):IsError() then return WE.allWaterMaterials end
     -- otherwise, return table with only one entry
-    return { [cvarMaterialName] = allWaterMaterials[cvarMaterialName] }
+    return { [cvarMaterialName] = WE.allWaterMaterials[cvarMaterialName] }
 end
 
 local function Cmd_FogColor(ply, cmd, args, str)
@@ -75,7 +75,7 @@ local function Cmd_ResetFogAll(ply, cmd, args, str)
 end
 
 local function Cmd_Reinitialize(ply, cmd, args, str)
-    allWaterMaterials = nil
+    WE.allWaterMaterials = nil
     WaterEdit_Initialize()
 end
 
@@ -88,7 +88,7 @@ local function Cmd_ListMaterials(ply, cmd, args, str)
         return math.floor(color.r).." "..math.floor(color.g).." "..math.floor(color.b)
     end
     WaterEdit_Initialize()
-    for materialName, tbl in pairs(allWaterMaterials) do
+    for materialName, tbl in pairs(WE.allWaterMaterials) do
         print(materialName.. "\n  defaults:  color "..ColorVectorToString(tbl.orig.fogColor)
             .." ("..tbl.orig.fogColor.."),  start "..tbl.orig.fogStart..",  end "..tbl.orig.fogEnd.."\n")
     end

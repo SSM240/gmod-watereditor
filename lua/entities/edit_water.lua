@@ -11,11 +11,11 @@ function ENT:Initialize()
 	BaseClass.Initialize(self)
 
 	self:SetMaterial("gmod/edit_water")
+
+    -- for debugging: uncomment to force refresh of WE.allWaterMaterials
+    -- WE.allWaterMaterials = nil
     
-    -- for debugging: uncomment to force refresh of allWaterMaterials
-    -- allWaterMaterials = nil
-    
-    -- populates allWaterMaterials with every water material in the map and their properties
+    -- populates WE.allWaterMaterials with every water material in the map and their properties
     WaterEdit_Initialize()
 end
 
@@ -27,7 +27,7 @@ function ENT:SetupDataTables()
             ["#watereditor.watermaterialoptions.abovewater"] = "Above water",
             ["#watereditor.watermaterialoptions.belowwater"] = "Below water"
         }
-        for materialName, _ in pairs(allWaterMaterials) do
+        for materialName, _ in pairs(WE.allWaterMaterials) do
             tbl[materialName] = materialName
         end
         return tbl
@@ -79,18 +79,18 @@ end
 function ENT:GetWaterMaterialTable(waterMaterialOverride)
     waterMaterialOverride = waterMaterialOverride or self:GetWaterMaterial()
     if waterMaterialOverride == "All" then
-        return allWaterMaterials
+        return WE.allWaterMaterials
     elseif waterMaterialOverride == "Above water" or waterMaterialOverride == "Below water" then
         local aboveWater = (waterMaterialOverride == "Above water")
         local result = {}
-        for materialName, tbl in pairs(allWaterMaterials) do
+        for materialName, tbl in pairs(WE.allWaterMaterials) do
             if tbl.aboveWater == aboveWater then
                 result[materialName] = tbl
             end
         end
         return result
     else
-        return { [waterMaterialOverride] = allWaterMaterials[waterMaterialOverride] }
+        return { [waterMaterialOverride] = WE.allWaterMaterials[waterMaterialOverride] }
     end
 end
 
