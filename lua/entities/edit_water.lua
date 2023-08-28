@@ -18,7 +18,7 @@ function ENT:SetupDataTables()
     -- allWaterMaterials = nil
     
     -- populates allWaterMaterials with every water material in the map and their properties
-    WaterFog_Initialize()
+    WaterEdit_Initialize()
 
     local function GetComboOptions()
         local tbl = {

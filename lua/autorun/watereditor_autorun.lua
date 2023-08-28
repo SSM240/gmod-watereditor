@@ -1,4 +1,4 @@
-function WaterFog_Initialize()
+function WaterEdit_Initialize()
     -- populate allWaterMaterials with every water material in the map and their properties
     if not allWaterMaterials then
         allWaterMaterials = {}  -- intentionally global
