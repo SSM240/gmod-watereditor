@@ -95,6 +95,7 @@ local function Cmd_ListMaterials(ply, cmd, args, str)
 end
 
 local function Cmd_DisableDirt(ply, cmd, args, str)
+    WaterEdit_Initialize()
     WE.disableDirt = not WE.disableDirt
     if WE.disableDirt then
         Material("effects/fleck_cement1"):SetTexture("$basetexture", "gmod/full_transparent")
@@ -104,6 +105,21 @@ local function Cmd_DisableDirt(ply, cmd, args, str)
         Material("effects/fleck_cement1"):SetTexture("$basetexture", "effects/fleck_cement1")
         Material("effects/fleck_cement2"):SetTexture("$basetexture", "effects/fleck_cement2")
         print("Enabled dirt particles")
+    end
+end
+
+function ENT:OnChangeDisableBlur(ply, cmd, args, str)
+    WaterEdit_Initialize()
+    WE.disableBlur = not WE.disableBlur
+    local material = Material("effects/water_warp01")
+    if WE.disableBlur then
+        material:SetTexture("$normalmap", "dev/flat_normal")
+        material:SetInt("$bluramount", 0)
+        print("Disabled blur")
+    else
+        material:SetTexture("$normalmap", WE.blurMaterialProperties.orig.normalMap)
+        material:SetInt("$bluramount", WE.blurMaterialProperties.orig.blurAmount)
+        print("Enabled blur")
     end
 end
 
@@ -147,6 +163,10 @@ local commands = {
     ["wateredit_disabledirt"] = {
         func = Cmd_DisableDirt,
         help = "Disables the floating dirt particles underwater"
+    }
+    ["wateredit_disableblur"] = {
+        func = Cmd_DisableBlur,
+        help = "Reduces underwater blur as much as possible"
     }
 }
 

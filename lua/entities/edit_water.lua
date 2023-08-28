@@ -50,6 +50,8 @@ function ENT:SetupDataTables()
     
     self:NetworkVar("Bool", 3, "DisableDirt",
         {KeyName = "disabledirt", Edit = {type = "Boolean", title = "#watereditor.disabledirt", order = 8, category = "Global"}})
+    self:NetworkVar("Bool", 4, "DisableBlur",
+        {KeyName = "disableblur", Edit = {type = "Boolean", title = "#watereditor.disableblur", order = 98, category = "Global"}})
     
     if CLIENT then
         self:NetworkVarNotify("EditWaterFogStart", self.OnChangeEditWaterFogStart)
@@ -60,6 +62,7 @@ function ENT:SetupDataTables()
         self:NetworkVarNotify("WaterFogColor", self.OnChangeWaterFogColor)
         self:NetworkVarNotify("WaterMaterial", self.OnChangeWaterMaterial)
         self:NetworkVarNotify("DisableDirt", self.OnChangeDisableDirt)
+        self:NetworkVarNotify("DisableBlur", self.OnChangeDisableBlur)
     end
 
     -- defaults
@@ -77,6 +80,7 @@ function ENT:SetupDataTables()
         self:SetWaterMaterial("All")
 
         self:SetDisableDirt(WE.disableDirt)
+        self:SetDisableBlur(WE.disableBlur)
     end
 
     if CLIENT then
@@ -194,6 +198,18 @@ function ENT:OnChangeDisableDirt(_, oldValue, newValue)
     else
         Material("effects/fleck_cement1"):SetTexture("$basetexture", "effects/fleck_cement1")
         Material("effects/fleck_cement2"):SetTexture("$basetexture", "effects/fleck_cement2")
+    end
+end
+
+function ENT:OnChangeDisableBlur(_, oldValue, newValue)
+    WE.disableBlur = newValue
+    local material = Material("effects/water_warp01")
+    if newValue then
+        material:SetTexture("$normalmap", "dev/flat_normal")
+        material:SetInt("$bluramount", 0)
+    else
+        material:SetTexture("$normalmap", WE.blurMaterialProperties.orig.normalMap)
+        material:SetInt("$bluramount", WE.blurMaterialProperties.orig.blurAmount)
     end
 end
 

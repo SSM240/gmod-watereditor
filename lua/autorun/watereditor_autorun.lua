@@ -27,4 +27,19 @@ function WaterEdit_Initialize()
     if WE.disableDirt == nil then
         WE.disableDirt = false
     end
+
+    -- not totally confident these will always be the same, so playing it safe
+    if not WE.blurMaterialProperties then
+        local material = Material("effects/water_warp01")
+        WE.blurMaterialProperties = {
+            orig = {
+                normalMap = material:GetTexture("$normalmap"),
+                blurAmount = material:GetInt("$bluramount")
+            }
+        }
+    end
+
+    if WE.disableBlur == nil then
+        WE.disableBlur = false
+    end
 end
