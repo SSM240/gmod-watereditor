@@ -166,7 +166,7 @@ local commands = {
     ["wateredit_disabledirt"] = {
         func = Cmd_DisableDirt,
         help = "Disables the floating dirt particles underwater"
-    }
+    },
     ["wateredit_disableblur"] = {
         func = Cmd_DisableBlur,
         help = "Reduces underwater blur as much as possible"
