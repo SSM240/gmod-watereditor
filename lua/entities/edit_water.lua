@@ -15,15 +15,11 @@ function ENT:Initialize()
 	BaseClass.Initialize(self)
 
 	self:SetMaterial("gmod/edit_water")
-
-    -- for debugging: uncomment to force refresh of WE.allWaterMaterials
-    -- WE.allWaterMaterials = nil
-    
-    -- populates WE.allWaterMaterials with every water material in the map and their properties
-    WaterEdit_Initialize()
 end
 
 function ENT:SetupDataTables()
+    -- this feels like it should go in Initialize but that doesn't work as well for some reason
+    WaterEdit_Initialize()
 
     local function GetComboOptions()
         local tbl = {
