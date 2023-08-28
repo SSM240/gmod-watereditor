@@ -163,11 +163,11 @@ local commands = {
         func = Cmd_ListMaterials, 
         help = "Lists all known water materials in the current map and their default parameters"
     },
-    ["wateredit_disabledirt"] = {
+    ["wateredit_toggledirt"] = {
         func = Cmd_DisableDirt,
         help = "Disables the floating dirt particles underwater"
     },
-    ["wateredit_disableblur"] = {
+    ["wateredit_toggleblur"] = {
         func = Cmd_DisableBlur,
         help = "Reduces underwater blur as much as possible"
     }
