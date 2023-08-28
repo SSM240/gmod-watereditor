@@ -33,27 +33,26 @@ function ENT:SetupDataTables()
     end
 
     self:NetworkVar("Bool", 0, "EditWaterFogStart", {KeyName = "editwaterfogstart", Edit = {type = "Boolean", title = "#watereditor.editwaterfogstart", order = 1}})
-    self:NetworkVarNotify("EditWaterFogStart", self.OnChangeEditWaterFogStart)
-
     self:NetworkVar("Float", 0, "WaterFogStart", {KeyName = "waterfogstart", Edit = {type = "Float", title = "#watereditor.waterfogstart", min = -10000, max = 10000, order = 2}})
-    self:NetworkVarNotify("WaterFogStart", self.OnChangeWaterFogStart)
-
+    
     self:NetworkVar("Bool", 1, "EditWaterFogEnd", {KeyName = "editwaterfogEnd", Edit = {type = "Boolean", title = "#watereditor.editwaterfogend", order = 3}})
-    self:NetworkVarNotify("EditWaterFogEnd", self.OnChangeEditWaterFogEnd)
-
     self:NetworkVar("Float", 1, "WaterFogEnd", {KeyName = "waterfogend", Edit = {type = "Float", title = "#watereditor.waterfogend", min = 0, max = 10000, order = 4}})
-    self:NetworkVarNotify("WaterFogEnd", self.OnChangeWaterFogEnd)
 
     self:NetworkVar("Bool", 2, "EditWaterFogColor", {KeyName = "editwaterfogcolor", Edit = {type = "Boolean", title = "#watereditor.editwaterfogcolor", order = 5}})
-    self:NetworkVarNotify("EditWaterFogColor", self.OnChangeEditWaterFogColor)
-
     self:NetworkVar("Vector", 0, "WaterFogColor", {KeyName = "waterfogcolor", Edit = {type = "VectorColor", title = "#watereditor.waterfogcolor", order = 6}})
-    self:NetworkVarNotify("WaterFogColor", self.OnChangeWaterFogColor)
 
     self:NetworkVar("String", 0, "WaterMaterial", 
         {KeyName = "watermaterial", Edit = {type = "Combo", title = "#watereditor.watermaterial", text = "All", order = 7, values = GetComboOptions()}})
-    self:NetworkVarNotify("WaterMaterial", self.OnChangeWaterMaterial)
     
+    if CLIENT then
+        self:NetworkVarNotify("EditWaterFogStart", self.OnChangeEditWaterFogStart)
+        self:NetworkVarNotify("WaterFogStart", self.OnChangeWaterFogStart)
+        self:NetworkVarNotify("EditWaterFogEnd", self.OnChangeEditWaterFogEnd)
+        self:NetworkVarNotify("WaterFogEnd", self.OnChangeWaterFogEnd)
+        self:NetworkVarNotify("EditWaterFogColor", self.OnChangeEditWaterFogColor)
+        self:NetworkVarNotify("WaterFogColor", self.OnChangeWaterFogColor)
+        self:NetworkVarNotify("WaterMaterial", self.OnChangeWaterMaterial)
+    end
 
     -- defaults
     if SERVER then
@@ -70,7 +69,9 @@ function ENT:SetupDataTables()
         self:SetWaterMaterial("All")
     end
 
-    self:ForceApplyProperties()
+    if CLIENT then
+        self:ForceApplyProperties()
+    end
 
 end
 
