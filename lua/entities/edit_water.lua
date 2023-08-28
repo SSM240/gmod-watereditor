@@ -51,7 +51,7 @@ function ENT:SetupDataTables()
     self:NetworkVar("Bool", 3, "DisableDirt",
         {KeyName = "disabledirt", Edit = {type = "Boolean", title = "#watereditor.disabledirt", order = 8, category = "Global"}})
     self:NetworkVar("Bool", 4, "DisableBlur",
-        {KeyName = "disableblur", Edit = {type = "Boolean", title = "#watereditor.disableblur", order = 98, category = "Global"}})
+        {KeyName = "disableblur", Edit = {type = "Boolean", title = "#watereditor.disableblur", order = 9, category = "Global"}})
     
     if CLIENT then
         self:NetworkVarNotify("EditWaterFogStart", self.OnChangeEditWaterFogStart)
