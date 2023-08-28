@@ -33,17 +33,23 @@ function ENT:SetupDataTables()
         return tbl
     end
 
-    self:NetworkVar("Bool", 0, "EditWaterFogStart", {KeyName = "editwaterfogstart", Edit = {type = "Boolean", title = "#watereditor.editwaterfogstart", order = 1}})
-    self:NetworkVar("Float", 0, "WaterFogStart", {KeyName = "waterfogstart", Edit = {type = "Float", title = "#watereditor.waterfogstart", min = -10000, max = 10000, order = 2}})
-    
-    self:NetworkVar("Bool", 1, "EditWaterFogEnd", {KeyName = "editwaterfogEnd", Edit = {type = "Boolean", title = "#watereditor.editwaterfogend", order = 3}})
-    self:NetworkVar("Float", 1, "WaterFogEnd", {KeyName = "waterfogend", Edit = {type = "Float", title = "#watereditor.waterfogend", min = 0, max = 10000, order = 4}})
-
-    self:NetworkVar("Bool", 2, "EditWaterFogColor", {KeyName = "editwaterfogcolor", Edit = {type = "Boolean", title = "#watereditor.editwaterfogcolor", order = 5}})
-    self:NetworkVar("Vector", 0, "WaterFogColor", {KeyName = "waterfogcolor", Edit = {type = "VectorColor", title = "#watereditor.waterfogcolor", order = 6}})
-
+    self:NetworkVar("Bool", 0, "EditWaterFogStart", 
+        {KeyName = "editwaterfogstart", Edit = {type = "Boolean", title = "#watereditor.editwaterfogstart", order = 1, category = "Fog"}})
+    self:NetworkVar("Float", 0, "WaterFogStart", 
+        {KeyName = "waterfogstart", Edit = {type = "Float", title = "#watereditor.waterfogstart", min = -10000, max = 10000, order = 2, category = "Fog"}})
+    self:NetworkVar("Bool", 1, "EditWaterFogEnd", 
+        {KeyName = "editwaterfogEnd", Edit = {type = "Boolean", title = "#watereditor.editwaterfogend", order = 3, category = "Fog"}})
+    self:NetworkVar("Float", 1, "WaterFogEnd", 
+        {KeyName = "waterfogend", Edit = {type = "Float", title = "#watereditor.waterfogend", min = 0, max = 10000, order = 4, category = "Fog"}})
+    self:NetworkVar("Bool", 2, "EditWaterFogColor", 
+        {KeyName = "editwaterfogcolor", Edit = {type = "Boolean", title = "#watereditor.editwaterfogcolor", order = 5, category = "Fog"}})
+    self:NetworkVar("Vector", 0, "WaterFogColor", 
+        {KeyName = "waterfogcolor", Edit = {type = "VectorColor", title = "#watereditor.waterfogcolor", order = 6, category = "Fog"}})
     self:NetworkVar("String", 0, "WaterMaterial", 
-        {KeyName = "watermaterial", Edit = {type = "Combo", title = "#watereditor.watermaterial", text = "All", order = 7, values = GetComboOptions()}})
+        {KeyName = "watermaterial", Edit = {type = "Combo", title = "#watereditor.watermaterial", text = "All", order = 7, category = "Fog", values = GetComboOptions()}})
+    
+    self:NetworkVar("Bool", 3, "DisableDirt",
+        {KeyName = "disabledirt", Edit = {type = "Boolean", title = "#watereditor.disabledirt", order = 8, category = "Global"}})
     
     if CLIENT then
         self:NetworkVarNotify("EditWaterFogStart", self.OnChangeEditWaterFogStart)
@@ -53,6 +59,7 @@ function ENT:SetupDataTables()
         self:NetworkVarNotify("EditWaterFogColor", self.OnChangeEditWaterFogColor)
         self:NetworkVarNotify("WaterFogColor", self.OnChangeWaterFogColor)
         self:NetworkVarNotify("WaterMaterial", self.OnChangeWaterMaterial)
+        self:NetworkVarNotify("DisableDirt", self.OnChangeDisableDirt)
     end
 
     -- defaults
@@ -68,6 +75,8 @@ function ENT:SetupDataTables()
         self:SetWaterFogColor(Vector(0.027, 0.227, 0.259))
 
         self:SetWaterMaterial("All")
+
+        self:SetDisableDirt(WE.disableDirt)
     end
 
     if CLIENT then
@@ -174,6 +183,17 @@ function ENT:OnChangeWaterMaterial(_, oldValue, newValue)
                 material:SetFloat("$fogend", self:GetWaterFogEnd())
             end
         end
+    end
+end
+
+function ENT:OnChangeDisableDirt(_, oldValue, newValue)
+    WE.disableDirt = newValue
+    if newValue then
+        Material("effects/fleck_cement1"):SetTexture("$basetexture", "gmod/full_transparent")
+        Material("effects/fleck_cement2"):SetTexture("$basetexture", "gmod/full_transparent")
+    else
+        Material("effects/fleck_cement1"):SetTexture("$basetexture", "effects/fleck_cement1")
+        Material("effects/fleck_cement2"):SetTexture("$basetexture", "effects/fleck_cement2")
     end
 end
 

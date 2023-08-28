@@ -23,4 +23,8 @@ function WaterEdit_Initialize()
             end
         end
     end
+
+    if WE.disableDirt == nil then
+        WE.disableDirt = false
+    end
 end

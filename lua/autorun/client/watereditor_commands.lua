@@ -94,6 +94,19 @@ local function Cmd_ListMaterials(ply, cmd, args, str)
     end
 end
 
+local function Cmd_DisableDirt(ply, cmd, args, str)
+    WE.disableDirt = not WE.disableDirt
+    if WE.disableDirt then
+        Material("effects/fleck_cement1"):SetTexture("$basetexture", "gmod/full_transparent")
+        Material("effects/fleck_cement2"):SetTexture("$basetexture", "gmod/full_transparent")
+        print("Disabled dirt particles")
+    else
+        Material("effects/fleck_cement1"):SetTexture("$basetexture", "effects/fleck_cement1")
+        Material("effects/fleck_cement2"):SetTexture("$basetexture", "effects/fleck_cement2")
+        print("Enabled dirt particles")
+    end
+end
+
 local commands = {
     ["wateredit_fog_color"] = {
         func = Cmd_FogColor, 
@@ -131,13 +144,16 @@ local commands = {
         func = Cmd_ListMaterials, 
         help = "Lists all known water materials in the current map and their default parameters"
     },
+    ["wateredit_disabledirt"] = {
+        func = Cmd_DisableDirt,
+        help = "Disables the floating dirt particles underwater"
+    }
 }
 
 for name, info in pairs(commands) do
     concommand.Add(name, info.func, nil, info.help)
 end
 
--- TODO: make a concommand that just acts like a fake convar? lol
 CreateClientConVar(
     "wateredit_material_override", "nil", false, false, 
     "If set to a valid material, wateredit commands will only change that material\n   (use wateredit_list_materials to see all known water materials in current map)")
