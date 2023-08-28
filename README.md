@@ -5,9 +5,7 @@ Garry's Mod addon that adds a Water Editor entity, as well as console commands t
 Current features:
 
 - Changing water fog
-
 - Disabling (or at least reducing) underwater blur
-
 - Disabling the ugly floating dirt particles
 
 There may be more features in the future.
