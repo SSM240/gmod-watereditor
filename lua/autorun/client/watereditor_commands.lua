@@ -111,7 +111,7 @@ local function Cmd_DisableDirt(ply, cmd, args, str)
     end
 end
 
-function ENT:OnChangeDisableBlur(ply, cmd, args, str)
+local function Cmd_DisableBlur(ply, cmd, args, str)
     WaterEdit_Initialize()
     WE.disableBlur = not WE.disableBlur
     local material = Material("effects/water_warp01")
