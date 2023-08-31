@@ -157,7 +157,7 @@ local commands = {
     },
     ["wateredit_mat_reinitialize"] = {
         func = Cmd_Reinitialize,
-        help = "Re-scans map for water textures (NOTE: not recommended to use after making changes)"
+        help = "Re-scans map for water materials (NOTE: not recommended to use after making changes to water materials)"
     },
     ["wateredit_mat_list"] = {
         func = Cmd_ListMaterials, 
