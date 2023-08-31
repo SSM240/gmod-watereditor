@@ -127,41 +127,41 @@ local function Cmd_DisableBlur(ply, cmd, args, str)
 end
 
 local commands = {
-    ["wateredit_fog_color"] = {
+    ["wateredit_mat_fogcolor"] = {
         func = Cmd_FogColor, 
         help = "Sets water fog color (3 numbers for R, G, and B, in range 0-255)"
     },
-    ["wateredit_fog_start"] = {
+    ["wateredit_mat_fogstart"] = {
         func = Cmd_FogStart, 
         help = "Sets water fog start position (any number)"
     },
-    ["wateredit_fog_end"] = {
+    ["wateredit_mat_fogend"] = {
         func = Cmd_FogEnd, 
         help = "Sets water fog end position (any number)"
     },
-    ["wateredit_reset_fog_color"] = {
+    ["wateredit_mat_resetfogcolor"] = {
         func = Cmd_ResetFogColor, 
         help = "Resets water fog color to default"
     },
-    ["wateredit_reset_fog_start"] = {
+    ["wateredit_mat_resetfogstart"] = {
         func = Cmd_ResetFogStart, 
         help = "Resets water fog start position to default"
     },
-    ["wateredit_reset_fog_end"] = {
+    ["wateredit_mat_resetfogend"] = {
         func = Cmd_ResetFogEnd, 
         help = "Resets water fog end position to default"
     },
-    ["wateredit_reset_fog"] = {
+    ["wateredit_mat_resetfog"] = {
         func = Cmd_ResetFogAll, 
         help = "Resets all water fog parameters to default"
     },
-    ["wateredit_reinitialize"] = {
+    ["wateredit_mat_reinitialize"] = {
         func = Cmd_Reinitialize,
-        help = "Re-scans map for water textures"
+        help = "Re-scans map for water textures (NOTE: not recommended to use after making changes)"
     },
-    ["wateredit_list_materials"] = {
+    ["wateredit_mat_list"] = {
         func = Cmd_ListMaterials, 
-        help = "Lists all known water materials in the current map and their default parameters"
+        help = "Lists all known water materials in the current map and their default fog parameters"
     },
     ["wateredit_toggledirt"] = {
         func = Cmd_DisableDirt,
@@ -178,5 +178,5 @@ for name, info in pairs(commands) do
 end
 
 CreateClientConVar(
-    "wateredit_material_override", "nil", false, false, 
-    "If set to a valid material, wateredit commands will only change that material\n   (use wateredit_list_materials to see all known water materials in current map)")
+    "wateredit_mat_override", "nil", false, false, 
+    "If set to a valid material, wateredit_mat commands will only change that material\n   (use wateredit_mat_list to see all known water materials in current map)")
