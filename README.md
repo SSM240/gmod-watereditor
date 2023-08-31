@@ -8,6 +8,4 @@ Current features:
 - Disabling (or at least reducing) underwater blur
 - Disabling the ugly floating dirt particles
 
-There may be more features in the future.
-
-See the Workshop page for more info... whenever I get around to making it :p
+See [the Workshop page](https://steamcommunity.com/sharedfiles/filedetails/?id=3028509766) for more info.
