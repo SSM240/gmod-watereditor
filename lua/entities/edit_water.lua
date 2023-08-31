@@ -74,7 +74,6 @@ function ENT:SetupDataTables()
         self:SetWaterFogEnd(2000)
 
         self:SetEditWaterFogColor(false)
-        -- TODO: figure out how to make this default to one of the normal material colors?
         self:SetWaterFogColor(Vector(0.027, 0.227, 0.259))
 
         self:SetWaterMaterial("All")
