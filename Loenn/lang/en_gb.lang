@@ -24,7 +24,13 @@ entities.SSMHelper/ResizableDashSwitch.attributes.description.attachToSolid=If t
 entities.SSMHelper/ResizableDashSwitch.attributes.description.bounceInDreamBlock=If true, hitting the switch while in a dream block will bounce the player off of the switch.
 
 entities.SSMHelper/DashBoostField.placements.name.useDash=Nyom Buble (Use Dash)
-entities.SSMHelper/DashBoostField.placements.name.refillDash=Nyom Buble (Refill Dash)
+entities.SSMHelper/DashBoostField.placements.name.preserveDash=Nyom Buble (Preserve Dash)
+entities.SSMHelper/DashBoostField.attributes.description.color=The color of the field.
+entities.SSMHelper/DashBoostField.attributes.description.dashSpeedMultiplier=How much the player's dash should be boosted.
+entities.SSMHelper/DashBoostField.attributes.description.timeRateMultiplier=How much the game should down while the player is inside (1 is normal speed, 0.5 is half, etc.)
+entities.SSMHelper/DashBoostField.attributes.description.radius=The radius of the effect, in tiles.
+entities.SSMHelper/DashBoostField.attributes.name.preserve=Preserve Dash
+entities.SSMHelper/DashBoostField.attributes.description.preserve=Whether or not the field will save the player's dash when dashing within it.
 
 entities.SSMHelper/HoldableDashTrigger.placements.name.normal=Dash With Holdable Trigger
 entities.SSMHelper/HoldableDashTrigger.attributes.description.mode="Toggle" will set or clear a session flag that allows dashing anywhere.\n"OnStay" will force the ability to be on/off while inside the trigger, regardless of what the session flag is set to.

@@ -9,7 +9,7 @@ dashBoostField.placements = {
     {
         name = "useDash",
         data = {
-            preserveDash = false,
+            preserve = false,
             color = "ffffff",
             dashSpeedMultiplier = 1.7,
             timeRateMultiplier = 0.65,
@@ -17,9 +17,9 @@ dashBoostField.placements = {
         }
     },
     {
-        name = "refillDash",
+        name = "preserveDash",
         data = {
-            refillDash = true,
+            preserve = true,
             color = "ffffff",
             dashSpeedMultiplier = 1.7,
             timeRateMultiplier = 0.65,
