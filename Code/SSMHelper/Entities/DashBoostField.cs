@@ -125,6 +125,10 @@ namespace Celeste.Mod.SSMHelper.Entities
                 cursor.Emit(OpCodes.Ldarg_0);
                 cursor.EmitDelegate(ModifyTimeRate);
             }
+            else
+            {
+                Logger.Log(LogLevel.Warn, "SSMHelper", "Could not hook Level.Update!");
+            }
         }
 
         private static bool IsDashingOrRespawning(Player player)
@@ -147,7 +151,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             // the last dash has ended so this should definitely be reset
             if (wasDashing && !(self.DashAttacking || self.StateMachine.State == Player.StDash))
             {
-                DynamicData.For(self).Set("dashBoosted", false);
+                DynamicData.For(self).Set("ssmhelper_dashBoosted", false);
             }
         }
 
@@ -164,14 +168,14 @@ namespace Celeste.Mod.SSMHelper.Entities
             DashBoostField boostField = self.CollideFirst<DashBoostField>();
             if (boostField != null && boostField.Active)
             {
-                playerData.Set("dashBoosted", true);
-                playerData.Set("dashBoostSpeed", boostField.DashSpeedMult);
+                playerData.Set("ssmhelper_dashBoosted", true);
+                playerData.Set("ssmhelper_dashBoostSpeed", boostField.DashSpeedMult);
                 self.Add(new Coroutine(RefillDashIfSelected(self)));
             }
             else
             {
                 // just to be on the safe side
-                playerData.Set("dashBoosted", false);
+                playerData.Set("ssmhelper_dashBoosted", false);
             }
             orig(self);
         }
@@ -192,9 +196,9 @@ namespace Celeste.Mod.SSMHelper.Entities
         private static float ModifySpeed(float speed, Player player)
         {
             DynamicData playerData = DynamicData.For(player);
-            if (SafeGet(playerData, "dashBoosted", defaultValue: false))
+            if (SafeGet(playerData, "ssmhelper_dashBoosted", defaultValue: false))
             {
-                speed *= SafeGet(playerData, "dashBoostSpeed", defaultValue: 1f);
+                speed *= SafeGet(playerData, "ssmhelper_dashBoostSpeed", defaultValue: 1f);
             }
             return speed;
         }
@@ -202,9 +206,9 @@ namespace Celeste.Mod.SSMHelper.Entities
         private static Vector2 ModifySpeed(Vector2 speed, Player player)
         {
             DynamicData playerData = DynamicData.For(player);
-            if (SafeGet(playerData, "dashBoosted", defaultValue: false))
+            if (SafeGet(playerData, "ssmhelper_dashBoosted", defaultValue: false))
             {
-                speed *= SafeGet(playerData, "dashBoostSpeed", defaultValue: 1f);
+                speed *= SafeGet(playerData, "ssmhelper_dashBoostSpeed", defaultValue: 1f);
             }
             return speed;
         }
@@ -219,6 +223,10 @@ namespace Celeste.Mod.SSMHelper.Entities
                 cursor.Emit(OpCodes.Ldarg_0);
                 cursor.Emit(OpCodes.Ldfld, f_this);
                 cursor.EmitDelegate<Func<Vector2, Player, Vector2>>(ModifySpeed);
+            }
+            else
+            {
+                Logger.Log(LogLevel.Warn, "SSMHelper", "Could not hook Player.DashCoroutine!");
             }
         }
 
@@ -251,6 +259,10 @@ namespace Celeste.Mod.SSMHelper.Entities
                 cursor.Emit(OpCodes.Ldarg_0);
                 cursor.EmitDelegate<Func<float, Player, float>>(ModifySpeed);
             }
+            else
+            {
+                Logger.Log(LogLevel.Warn, "SSMHelper", "Could not hook Player.SuperWallJump!");
+            }
         }
 
         private static void IL_Player_SuperJump(ILContext il)
@@ -261,6 +273,10 @@ namespace Celeste.Mod.SSMHelper.Entities
                 cursor.Emit(OpCodes.Ldarg_0);
                 cursor.EmitDelegate<Func<float, Player, float>>(ModifySpeed);
             }
+            else
+            {
+                Logger.Log(LogLevel.Warn, "SSMHelper", "Could not hook Player.SuperJump!");
+            }
         }
 
         private static void IL_Player_DreamDashBegin(ILContext il)
@@ -270,6 +286,10 @@ namespace Celeste.Mod.SSMHelper.Entities
             {
                 cursor.Emit(OpCodes.Ldarg_0);
                 cursor.EmitDelegate<Func<float, Player, float>>(ModifySpeed);
+            }
+            else
+            {
+                Logger.Log(LogLevel.Warn, "SSMHelper", "Could not hook Player.DreamDashBegin!");
             }
         }
 

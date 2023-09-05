@@ -25,6 +25,7 @@ namespace Celeste.Mod.SSMHelper
             ResizableDashSwitch.Load();
             SolidStaticMoverHitbox.Load();
             //ChangeMaxCassetteTrigger.Load();
+            DashBoostField.Load();
         }
 
         public override void Unload()
@@ -34,6 +35,7 @@ namespace Celeste.Mod.SSMHelper
             ResizableDashSwitch.Unload();
             SolidStaticMoverHitbox.Unload();
             //ChangeMaxCassetteTrigger.Unload();
+            DashBoostField.Unload();
         }
 
         public override void LoadContent(bool firstLoad)
@@ -43,6 +45,7 @@ namespace Celeste.Mod.SSMHelper
             _CustomEntitySpriteBank = new SpriteBank(GFX.Game, "Graphics/SSMHelper/CustomEntitySprites.xml");
 
             ResizableDashSwitch.LoadParticles();
+            DashBoostField.LoadParticles();
         }
     }
 }
