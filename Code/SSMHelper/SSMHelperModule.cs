@@ -26,6 +26,7 @@ namespace Celeste.Mod.SSMHelper
             SolidStaticMoverHitbox.Load();
             //ChangeMaxCassetteTrigger.Load();
             DashBoostField.Load();
+            BarrierDashSwitch.Load();
         }
 
         public override void Unload()
@@ -36,6 +37,7 @@ namespace Celeste.Mod.SSMHelper
             SolidStaticMoverHitbox.Unload();
             //ChangeMaxCassetteTrigger.Unload();
             DashBoostField.Unload();
+            BarrierDashSwitch.Unload();
         }
 
         public override void LoadContent(bool firstLoad)
