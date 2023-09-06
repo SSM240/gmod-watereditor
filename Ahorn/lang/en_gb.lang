@@ -1,2 +1,11 @@
 # Dash With Holdable Trigger
 placements.triggers.SJ2021/HoldableDashTrigger.tooltips.mode="Toggle" will set or clear a session flag that allows dashing anywhere.\n"OnStay" will force the ability to be on/off while inside the trigger, regardless of what the session flag is set to.
+
+# Dash Boost Field / Nyom Buble
+placements.entities.SJ2021/DashBoostField.tooltips.color=The color of the field.
+placements.entities.SJ2021/DashBoostField.tooltips.dashSpeedMultiplier=How much the player's dash should be boosted.
+placements.entities.SJ2021/DashBoostField.tooltips.timeRateMultiplier=How much the game should down while the player is inside (1 is normal speed, 0.5 is half, etc.)
+placements.entities.SJ2021/DashBoostField.tooltips.radius=The radius of the effect, in tiles.
+placements.entities.SJ2021/DashBoostField.tooltips.preserve=Whether or not the field will save the player's dash when dashing within it.
+
+# Crystal Bomb Badeline Boss

@@ -3,6 +3,7 @@ using Monocle;
 using System;
 using Celeste.Mod.SSMHelper.Entities;
 using Celeste.Mod.SSMHelper.Triggers;
+using MonoMod.ModInterop;
 
 namespace Celeste.Mod.SSMHelper
 {
@@ -27,6 +28,9 @@ namespace Celeste.Mod.SSMHelper
             //ChangeMaxCassetteTrigger.Load();
             DashBoostField.Load();
             BarrierDashSwitch.Load();
+            CrystalBombBadelineBoss.Load();
+
+            typeof(CavernHelperImports).ModInterop();
         }
 
         public override void Unload()
@@ -38,6 +42,7 @@ namespace Celeste.Mod.SSMHelper
             //ChangeMaxCassetteTrigger.Unload();
             DashBoostField.Unload();
             BarrierDashSwitch.Unload();
+            CrystalBombBadelineBoss.Unload();
         }
 
         public override void LoadContent(bool firstLoad)

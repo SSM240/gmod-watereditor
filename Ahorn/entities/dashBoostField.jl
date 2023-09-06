@@ -2,7 +2,7 @@ module SSMHelperDashBoostField
 
 using ..Ahorn, Maple
 
-@mapdef Entity "SSMHelper/DashBoostField" DashBoostField(x::Integer, y::Integer, preserveDash::Bool=true,
+@mapdef Entity "SSMHelper/DashBoostField" DashBoostField(x::Integer, y::Integer, preserve::Bool=true,
      color::String="ffffff", dashSpeedMultiplier::Number=1.7, timeRateMultiplier::Number=0.65,
      radius::Number=1.5)
 RefillDashBoostField(x::Integer, y::Integer) = DashBoostField(x, y, true)
