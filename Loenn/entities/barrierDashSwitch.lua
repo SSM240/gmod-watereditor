@@ -1,4 +1,5 @@
 local drawableSprite = require("structs.drawable_sprite")
+local utils = require("utils")
 
 local barrierDashSwitch = {}
 
@@ -37,6 +38,10 @@ function barrierDashSwitch.sprite(room, entity)
     end
 
     return sprite
+end
+
+function barrierDashSwitch.selection(room, entity)
+    return utils.rectangle(entity.x - 2, entity.y - 1, 12, 18)
 end
 
 return barrierDashSwitch
