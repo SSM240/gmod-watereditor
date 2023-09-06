@@ -41,6 +41,16 @@ entities.SSMHelper/BarrierDashSwitch.attributes.description.orientation=Which wa
 entities.SSMHelper/BarrierDashSwitch.attributes.description.persistent=If true, the switch will stay pressed, even if the player dies or leave the room.
 entities.SSMHelper/BarrierDashSwitch.attributes.description.spritePath=The folder of the dash switch sprites to use. Leave blank to use the default temple sprite.
 
+entities.SSMHelper/CrystalBombBadelineBoss.placements.name.normal=Dangerous Badeline Boss
+entities.SSMHelper/CrystalBombBadelineBoss.attributes.description.disableCameraLock=Disables all camera locking, both horizontal and vertical.\nOverrides the "Camera Past Y" and "Camera Lock Y" settings.
+entities.SSMHelper/CrystalBombBadelineBoss.attributes.description.music=The music event that should be triggered if "Can Change Music" is checked.\nDefaults to normal boss music if empty.
+# (these are copied from original finalBoss)
+entities.SSMHelper/CrystalBombBadelineBoss.attributes.description.startHit=Determines whether or not Badeline waits to attack until the first hit or upon room entry.
+entities.SSMHelper/CrystalBombBadelineBoss.attributes.description.patternIndex=Determines what pattern of attack Badeline uses.\n 0 - Badeline transforms into the boss after being hit once\n 1 - Shoots orbs\n 2 - Shoots laser followed by one orb\n 3 - Shoots five streams of two orbs\n 4 - Shoots five streams of two orbs followed by one laser\n 5 - Shoots laser followed by three streams of two orbs\n 6 - Shoots lasers\n 7 - Shoots orbs with less delay\n 8 - Shoots lasers with less delay\n 9 - Shoots streams of two orbs\n 10 - Does nothing\n 11 - Shoots orbs with more delay\n 12 - Does nothing\n 13 - Shoots orbs after getting hit once\n 14 - Shoots lasers with very short delay\n 15 - Shoots lasers with more delay
+entities.SSMHelper/CrystalBombBadelineBoss.attributes.description.cameraLockY=Whether the camera should be locked vertically, functioning similarly as a killbox.
+entities.SSMHelper/CrystalBombBadelineBoss.attributes.description.cameraPastY=Locks the camera from vertically rising, and changes the bottom screen killbox plane to be under Badeline's current position.
+entities.SSMHelper/CrystalBombBadelineBoss.attributes.description.canChangeMusic=Whether the boss should be able to change the music to the boss track.
+
 # ------------ triggers ------------
 
 triggers.SSMHelper/DashCancelTrigger.placements.name.normal=Dash Cancel Trigger
