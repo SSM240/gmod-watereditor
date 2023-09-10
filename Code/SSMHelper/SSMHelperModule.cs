@@ -24,7 +24,6 @@ namespace Celeste.Mod.SSMHelper
             StarjumpTilesetHelper.Load();
             ReverseKillbox.Load();
             ResizableDashSwitch.Load();
-            SolidStaticMoverHitbox.Load();
             //ChangeMaxCassetteTrigger.Load();
             DashBoostField.Load();
             BarrierDashSwitch.Load();
@@ -38,7 +37,6 @@ namespace Celeste.Mod.SSMHelper
             StarjumpTilesetHelper.Unload();
             ReverseKillbox.Unload();
             ResizableDashSwitch.Unload();
-            SolidStaticMoverHitbox.Unload();
             //ChangeMaxCassetteTrigger.Unload();
             DashBoostField.Unload();
             BarrierDashSwitch.Unload();
