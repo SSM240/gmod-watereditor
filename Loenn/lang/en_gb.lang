@@ -14,10 +14,10 @@ entities.SSMHelper/ForceCassetteBlockController.placements.name.normal=Force Cas
 entities.SSMHelper/ForceCassetteBlockController.placements.description.normal=Always activate cassette blocks in this room, even if a cassette has previously been collected this session.
 entities.SSMHelper/DelayedUltraIndicatorController.placements.name.normal=Delayed Ultra Indicator Controller
 
-entities.SSMHelper/ResizableDashSwitch.placements.name.Up=Paint Dash Switch (Up)
-entities.SSMHelper/ResizableDashSwitch.placements.name.Down=Paint Dash Switch (Down)
-entities.SSMHelper/ResizableDashSwitch.placements.name.Left=Paint Dash Switch (Left)
-entities.SSMHelper/ResizableDashSwitch.placements.name.Right=Paint Dash Switch (Right)
+entities.SSMHelper/ResizableDashSwitch.placements.name.Up=Resizable Dash Switch (Up)
+entities.SSMHelper/ResizableDashSwitch.placements.name.Down=Resizable Dash Switch (Down)
+entities.SSMHelper/ResizableDashSwitch.placements.name.Left=Resizable Dash Switch (Left)
+entities.SSMHelper/ResizableDashSwitch.placements.name.Right=Resizable Dash Switch (Right)
 entities.SSMHelper/ResizableDashSwitch.attributes.description.orientation=Which way the switch should be facing.
 entities.SSMHelper/ResizableDashSwitch.attributes.description.persistent=If true, the switch will stay pressed, even if the player dies or leave the room.
 entities.SSMHelper/ResizableDashSwitch.attributes.description.actLikeTouchSwitch=If true, pressing all switches will activate switch gates.
