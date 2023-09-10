@@ -90,12 +90,12 @@ namespace Celeste.Mod.SSMHelper.Entities
         }
 
         public ResizableDashSwitch(EntityData data, Vector2 offset, EntityID id)
-            : this(data.Position + offset, SwitchSide(data.Enum("orientation", Sides.Up)),
+            : this(data.Position + offset, SwapSide(data.Enum("orientation", Sides.Up)),
                   data.Bool("persistent"), id, GetWidth(data), data.Bool("actLikeTouchSwitch", true),
                   data.Bool("attachToSolid", true), data.Bool("bounceInDreamBlock", true))
         { }
 
-        private static Sides SwitchSide(Sides side) => side switch
+        private static Sides SwapSide(Sides side) => side switch
         {
             Sides.Up => Sides.Down,
             Sides.Down => Sides.Up,
@@ -106,7 +106,7 @@ namespace Celeste.Mod.SSMHelper.Entities
 
         private static int GetWidth(EntityData data)
         {
-            Sides side = SwitchSide(data.Enum("orientation", Sides.Left));
+            Sides side = SwapSide(data.Enum("orientation", Sides.Left));
             return side switch
             {
                 Sides.Up => data.Width,
