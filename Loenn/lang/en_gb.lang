@@ -40,7 +40,7 @@ entities.SSMHelper/BarrierDashSwitch.placements.name.Left=Barrier Dash Switch (L
 entities.SSMHelper/BarrierDashSwitch.placements.name.Right=Barrier Dash Switch (Right)
 entities.SSMHelper/BarrierDashSwitch.attributes.description.orientation=Which way the switch should be facing.
 entities.SSMHelper/BarrierDashSwitch.attributes.description.persistent=If true, the switch will stay pressed, even if the player dies or leave the room.
-entities.SSMHelper/BarrierDashSwitch.attributes.description.spritePath=The folder of the dash switch sprites to use. Leave blank to use the default temple sprite.
+entities.SSMHelper/BarrierDashSwitch.attributes.description.spritePath=The folder of the dash switch sprites to use. If blank, it will use the default temple sprite.
 
 entities.SSMHelper/CrystalBombBadelineBoss.placements.name.normal=Dangerous Badeline Boss
 entities.SSMHelper/CrystalBombBadelineBoss.attributes.description.disableCameraLock=Disables all camera locking, both horizontal and vertical.\nOverrides the "Camera Past Y" and "Camera Lock Y" settings.
