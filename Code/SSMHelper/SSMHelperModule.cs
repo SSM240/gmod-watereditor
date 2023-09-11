@@ -27,9 +27,9 @@ namespace Celeste.Mod.SSMHelper
             //ChangeMaxCassetteTrigger.Load();
             DashBoostField.Load();
             BarrierDashSwitch.Load();
-            CrystalBombBadelineBoss.Load();
+            //CrystalBombBadelineBoss.Load();
 
-            typeof(CavernHelperImports).ModInterop();
+            //typeof(CavernHelperImports).ModInterop();
         }
 
         public override void Unload()
@@ -40,7 +40,7 @@ namespace Celeste.Mod.SSMHelper
             //ChangeMaxCassetteTrigger.Unload();
             DashBoostField.Unload();
             BarrierDashSwitch.Unload();
-            CrystalBombBadelineBoss.Unload();
+            //CrystalBombBadelineBoss.Unload();
         }
 
         public override void LoadContent(bool firstLoad)

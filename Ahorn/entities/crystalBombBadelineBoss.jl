@@ -1,57 +1,57 @@
-module SSMHelperCrystalBombBadelineBoss
+# module SSMHelperCrystalBombBadelineBoss
 
-using ..Ahorn, Maple
+# using ..Ahorn, Maple
 
-@mapdef Entity "SSMHelper/CrystalBombBadelineBoss" CrystalBombBadelineBoss(x::Integer, y::Integer, 
-    nodes::Array{Tuple{Integer, Integer}, 1}=Tuple{Integer, Integer}[], patternIndex::Integer=1, 
-    cameraPastY::Number=120.0, cameraLockY::Bool=true, canChangeMusic::Bool=true, music::String="",
-    disableCameraLock::Bool=false)
+# @mapdef Entity "SSMHelper/CrystalBombBadelineBoss" CrystalBombBadelineBoss(x::Integer, y::Integer, 
+#     nodes::Array{Tuple{Integer, Integer}, 1}=Tuple{Integer, Integer}[], patternIndex::Integer=1, 
+#     cameraPastY::Number=120.0, cameraLockY::Bool=true, canChangeMusic::Bool=true, music::String="",
+#     disableCameraLock::Bool=false)
 
-const placements = Ahorn.PlacementDict(
-    "Badeline Boss (Crystal Bomb)\n(SSM Helper)" => Ahorn.EntityPlacement(
-        CrystalBombBadelineBoss,
-    )
-)
+# const placements = Ahorn.PlacementDict(
+#     "Badeline Boss (Crystal Bomb)\n(SSM Helper)" => Ahorn.EntityPlacement(
+#         CrystalBombBadelineBoss,
+#     )
+# )
 
-Ahorn.editingOptions(entity::CrystalBombBadelineBoss) = Dict{String, Any}(
-    "patternIndex" => Maple.badeline_boss_shooting_patterns
-)
+# Ahorn.editingOptions(entity::CrystalBombBadelineBoss) = Dict{String, Any}(
+#     "patternIndex" => Maple.badeline_boss_shooting_patterns
+# )
 
-Ahorn.nodeLimits(entity::CrystalBombBadelineBoss) = 0, -1
+# Ahorn.nodeLimits(entity::CrystalBombBadelineBoss) = 0, -1
 
-sprite = "characters/badelineBoss/charge00.png"
+# sprite = "characters/badelineBoss/charge00.png"
 
-function Ahorn.selection(entity::CrystalBombBadelineBoss)
-    nodes = get(entity.data, "nodes", ())
-    x, y = Ahorn.position(entity)
+# function Ahorn.selection(entity::CrystalBombBadelineBoss)
+#     nodes = get(entity.data, "nodes", ())
+#     x, y = Ahorn.position(entity)
 
-    res = Ahorn.Rectangle[Ahorn.getSpriteRectangle(sprite, x, y)]
+#     res = Ahorn.Rectangle[Ahorn.getSpriteRectangle(sprite, x, y)]
     
-    for node in nodes
-        nx, ny = Int.(node)
+#     for node in nodes
+#         nx, ny = Int.(node)
 
-        push!(res, Ahorn.getSpriteRectangle(sprite, nx, ny))
-    end
+#         push!(res, Ahorn.getSpriteRectangle(sprite, nx, ny))
+#     end
 
-    return res
-end
+#     return res
+# end
 
-function Ahorn.renderSelectedAbs(ctx::Ahorn.Cairo.CairoContext, entity::CrystalBombBadelineBoss)
-    px, py = Ahorn.position(entity)
+# function Ahorn.renderSelectedAbs(ctx::Ahorn.Cairo.CairoContext, entity::CrystalBombBadelineBoss)
+#     px, py = Ahorn.position(entity)
 
-    for node in get(entity.data, "nodes", ())
-        nx, ny = Int.(node)
+#     for node in get(entity.data, "nodes", ())
+#         nx, ny = Int.(node)
 
-        Ahorn.drawArrow(ctx, px, py, nx, ny, Ahorn.colors.selection_selected_fc, headLength=6)
-        Ahorn.drawSprite(ctx, sprite, nx, ny)
+#         Ahorn.drawArrow(ctx, px, py, nx, ny, Ahorn.colors.selection_selected_fc, headLength=6)
+#         Ahorn.drawSprite(ctx, sprite, nx, ny)
 
-        px, py = nx, ny
-    end
-end
+#         px, py = nx, ny
+#     end
+# end
 
-function Ahorn.renderAbs(ctx::Ahorn.Cairo.CairoContext, entity::CrystalBombBadelineBoss, room::Maple.Room)
-    x, y = Ahorn.position(entity)
-    Ahorn.drawSprite(ctx, sprite, x, y)
-end
+# function Ahorn.renderAbs(ctx::Ahorn.Cairo.CairoContext, entity::CrystalBombBadelineBoss, room::Maple.Room)
+#     x, y = Ahorn.position(entity)
+#     Ahorn.drawSprite(ctx, sprite, x, y)
+# end
 
-end
+# end
