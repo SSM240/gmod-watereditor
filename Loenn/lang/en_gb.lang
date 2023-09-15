@@ -5,8 +5,11 @@ mods.SSMHelper.name=SSM Helper
 # ------------ entities ------------
 
 entities.SSMHelper/ReverseKillbox.placements.name.normal=Reverse Killbox
+
 entities.SSMHelper/ZeroGravBoundsController.placements.name.normal=Zero Grav Bounds Controller
+
 entities.SSMHelper/MovingSolidThingy.placements.name.normal=Cursed Moving Solid Thingy
+
 entities.SSMHelper/ForceCassetteBlockController.placements.name.normal=Force Cassette Block Controller
 entities.SSMHelper/ForceCassetteBlockController.placements.description.normal=Always activate cassette blocks in this room, even if a cassette has previously been collected this session.
 entities.SSMHelper/DelayedUltraIndicatorController.placements.name.normal=Delayed Ultra Indicator Controller
@@ -15,8 +18,47 @@ entities.SSMHelper/SeekerCrushZone.placements.name.normal=Seeker Crush Zone
 entities.SSMHelper/SeekerCrushZoneBlock.placements.name.normal=Seeker Crush Zone Block
 entities.SSMHelper/SeekerCrushBarrier.placements.name.normal=Seeker Crush Barrier
 
+entities.SSMHelper/ResizableDashSwitch.placements.name.Up=Resizable Dash Switch (Up)
+entities.SSMHelper/ResizableDashSwitch.placements.name.Down=Resizable Dash Switch (Down)
+entities.SSMHelper/ResizableDashSwitch.placements.name.Left=Resizable Dash Switch (Left)
+entities.SSMHelper/ResizableDashSwitch.placements.name.Right=Resizable Dash Switch (Right)
+entities.SSMHelper/ResizableDashSwitch.attributes.description.orientation=Which way the switch should be facing.
+entities.SSMHelper/ResizableDashSwitch.attributes.description.persistent=If true, the switch will stay pressed, even if the player dies or leave the room.
+entities.SSMHelper/ResizableDashSwitch.attributes.description.actLikeTouchSwitch=If true, pressing all switches will activate switch gates.
+entities.SSMHelper/ResizableDashSwitch.attributes.description.attachToSolid=If true, the switch will attach to any solid it's placed on.
+entities.SSMHelper/ResizableDashSwitch.attributes.description.bounceInDreamBlock=If true, hitting the switch while in a dream block will bounce the player off of the switch.
+
+entities.SSMHelper/DashBoostField.placements.name.useDash=Nyom Buble (Use Dash)
+entities.SSMHelper/DashBoostField.placements.name.preserveDash=Nyom Buble (Preserve Dash)
+entities.SSMHelper/DashBoostField.attributes.description.color=The color of the field.
+entities.SSMHelper/DashBoostField.attributes.description.dashSpeedMultiplier=How much the player's dash should be boosted.
+entities.SSMHelper/DashBoostField.attributes.description.timeRateMultiplier=How much the game should down while the player is inside (1 is normal speed, 0.5 is half, etc.)
+entities.SSMHelper/DashBoostField.attributes.description.radius=The radius of the effect, in tiles.
+entities.SSMHelper/DashBoostField.attributes.name.preserve=Preserve Dash
+entities.SSMHelper/DashBoostField.attributes.description.preserve=Whether or not the field will save the player's dash when dashing within it.
+
+entities.SSMHelper/HoldableDashTrigger.placements.name.normal=Dash With Holdable Trigger
+entities.SSMHelper/HoldableDashTrigger.attributes.description.mode="Toggle" will set or clear a session flag that allows dashing anywhere.\n"OnStay" will force the ability to be on/off while inside the trigger, regardless of what the session flag is set to.
+
+entities.SSMHelper/BarrierDashSwitch.placements.name.Left=Barrier Dash Switch (Left)
+entities.SSMHelper/BarrierDashSwitch.placements.name.Right=Barrier Dash Switch (Right)
+entities.SSMHelper/BarrierDashSwitch.attributes.description.orientation=Which way the switch should be facing.
+entities.SSMHelper/BarrierDashSwitch.attributes.description.persistent=If true, the switch will stay pressed, even if the player dies or leave the room.
+entities.SSMHelper/BarrierDashSwitch.attributes.description.spritePath=The folder of the dash switch sprites to use. If blank, it will use the default temple sprite.
+
+entities.SSMHelper/CrystalBombBadelineBoss.placements.name.normal=Dangerous Badeline Boss
+entities.SSMHelper/CrystalBombBadelineBoss.attributes.description.disableCameraLock=Disables all camera locking, both horizontal and vertical.\nOverrides the "Camera Past Y" and "Camera Lock Y" settings.
+entities.SSMHelper/CrystalBombBadelineBoss.attributes.description.music=The music event that should be triggered if "Can Change Music" is checked.\nDefaults to normal boss music if empty.
+# (these are copied from original finalBoss)
+entities.SSMHelper/CrystalBombBadelineBoss.attributes.description.startHit=Determines whether or not Badeline waits to attack until the first hit or upon room entry.
+entities.SSMHelper/CrystalBombBadelineBoss.attributes.description.patternIndex=Determines what pattern of attack Badeline uses.\n 0 - Badeline transforms into the boss after being hit once\n 1 - Shoots orbs\n 2 - Shoots laser followed by one orb\n 3 - Shoots five streams of two orbs\n 4 - Shoots five streams of two orbs followed by one laser\n 5 - Shoots laser followed by three streams of two orbs\n 6 - Shoots lasers\n 7 - Shoots orbs with less delay\n 8 - Shoots lasers with less delay\n 9 - Shoots streams of two orbs\n 10 - Does nothing\n 11 - Shoots orbs with more delay\n 12 - Does nothing\n 13 - Shoots orbs after getting hit once\n 14 - Shoots lasers with very short delay\n 15 - Shoots lasers with more delay
+entities.SSMHelper/CrystalBombBadelineBoss.attributes.description.cameraLockY=Whether the camera should be locked vertically, functioning similarly as a killbox.
+entities.SSMHelper/CrystalBombBadelineBoss.attributes.description.cameraPastY=Locks the camera from vertically rising, and changes the bottom screen killbox plane to be under Badeline's current position.
+entities.SSMHelper/CrystalBombBadelineBoss.attributes.description.canChangeMusic=Whether the boss should be able to change the music to the boss track.
+
 # ------------ triggers ------------
 
 triggers.SSMHelper/DashCancelTrigger.placements.name.normal=Dash Cancel Trigger
+triggers.SSMHelper/DashCancelTrigger.attributes.description.playSound=Makes a sound play when the dash is canceled.
 triggers.SSMHelper/ChangeMaxCassetteTrigger.placements.name.normal=Change Max Cassette Beat
 triggers.SSMHelper/TheoKillBoxTrigger.placements.name.normal=Theo Kill Box Trigger

@@ -10,12 +10,15 @@ namespace Celeste.Mod.SSMHelper.Triggers
     [CustomEntity("SSMHelper/DashCancelTrigger")]
     public class DashCancelTrigger : Trigger
     {
+        private bool shouldPlaySound;
+
         private Vector2 playerCurrentPosition;
         private Vector2 playerLastPosition;
 
         public DashCancelTrigger(EntityData data, Vector2 offset)
             : base(data, offset)
         {
+            shouldPlaySound = data.Bool("playSound", true);
         }
 
         public override void Update()
@@ -41,7 +44,10 @@ namespace Celeste.Mod.SSMHelper.Triggers
                 && player.DashDir != Vector2.Zero
                 && playerCurrentPosition != playerLastPosition)
             {
-                Audio.Play(SFX.game_04_whiteblock_fallthru);
+                if (shouldPlaySound)
+                {
+                    Audio.Play(SFX.game_04_whiteblock_fallthru);
+                }
                 player.StateMachine.ForceState(Player.StNormal);
                 // convert player's distance traveled last frame into actual speed
                 player.Speed = (playerCurrentPosition - playerLastPosition) / Engine.DeltaTime;
