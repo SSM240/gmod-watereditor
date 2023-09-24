@@ -19,6 +19,8 @@ namespace Celeste.Mod.SSMHelper.Entities
 
         private Vector2 badelinePosition;
 
+        private bool finished;
+
         public SeekerCrushZoneBlock(Vector2 position, Vector2[] nodes, int width, int height,
             char tile1, char tile2)
             : base(position, width, height, safe: false)
@@ -46,7 +48,7 @@ namespace Celeste.Mod.SSMHelper.Entities
         {
             base.Render();
             // copied from FinalBossMovingBlock
-            if (tilesEnd.Alpha > 0f && tilesEnd.Alpha < 1f)
+            if (!finished && tilesEnd.Alpha > 0f && tilesEnd.Alpha < 1f)
             {
                 int num = (int)((1f - tilesEnd.Alpha) * 16f);
                 Rectangle rect = new Rectangle((int)X, (int)Y, (int)Width, (int)Height);
@@ -77,7 +79,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             Scene.Add(badeline);
             Audio.Play(SFX.char_bad_booster_begin);
             StartShaking(2f);
-            AddVisualTween();
+            AddFadeInTween();
             crushZone.Visible = false;
 
             yield return 0.25f;
@@ -95,6 +97,8 @@ namespace Celeste.Mod.SSMHelper.Entities
             yield return 0.75f;
 
             badeline.Vanish();
+            finished = true;
+            AddFadeOutTween();
         }
 
         private BadelineDummy CreateBadeline(Vector2 position)
@@ -139,7 +143,7 @@ namespace Celeste.Mod.SSMHelper.Entities
             Add(moveTween);
         }
 
-        private void AddVisualTween()
+        private void AddFadeInTween()
         {
             Tween visualTween = Tween.Create(Tween.TweenMode.Oneshot, Ease.CubeIn, 0.25f, start: true);
             visualTween.OnUpdate = (t) =>
@@ -151,6 +155,22 @@ namespace Celeste.Mod.SSMHelper.Entities
             {
                 tilesEnd.Alpha = 1f;
                 tilesStart.Alpha = 0f;
+            };
+            Add(visualTween);
+        }
+
+        private void AddFadeOutTween()
+        {
+            Tween visualTween = Tween.Create(Tween.TweenMode.Oneshot, Ease.CubeIn, 0.25f, start: true);
+            visualTween.OnUpdate = (t) =>
+            {
+                tilesEnd.Alpha = 1 - t.Eased;
+                tilesStart.Alpha = 1 - tilesEnd.Alpha;
+            };
+            visualTween.OnComplete = (t) =>
+            {
+                tilesEnd.Alpha = 0f;
+                tilesStart.Alpha = 1f;
             };
             Add(visualTween);
         }
