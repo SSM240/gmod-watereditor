@@ -283,6 +283,14 @@ namespace Celeste.Mod.SSMHelper.Entities
             // this method does not affect refill gems for some reason so it works for me :)
             if (self.LastBooster is RedirectableBooster booster && booster.BoostingPlayer)
             {
+                Engine.Scene.OnEndOfFrame += () =>
+                {
+                    // refill dash anyway if player state has changed by the end of the frame
+                    if (self.StateMachine.State != Player.StRedDash)
+                    {
+                        orig(self);
+                    }
+                };
                 return false;
             }
             return orig(self);
