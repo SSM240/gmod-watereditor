@@ -36,11 +36,11 @@ function ENT:SetupDataTables()
     self:NetworkVar("Bool", 0, "EditWaterFogStart", 
         {KeyName = "editwaterfogstart", Edit = {type = "Boolean", title = "#watereditor.editwaterfogstart", order = 1, category = "Fog"}})
     self:NetworkVar("Float", 0, "WaterFogStart", 
-        {KeyName = "waterfogstart", Edit = {type = "Float", title = "#watereditor.waterfogstart", min = -10000, max = 10000, order = 2, category = "Fog"}})
+        {KeyName = "waterfogstart", Edit = {type = "Float", title = "#watereditor.waterfogstart", min = -40000, max = 40000, order = 2, category = "Fog"}})
     self:NetworkVar("Bool", 1, "EditWaterFogEnd", 
         {KeyName = "editwaterfogEnd", Edit = {type = "Boolean", title = "#watereditor.editwaterfogend", order = 3, category = "Fog"}})
     self:NetworkVar("Float", 1, "WaterFogEnd", 
-        {KeyName = "waterfogend", Edit = {type = "Float", title = "#watereditor.waterfogend", min = 0, max = 10000, order = 4, category = "Fog"}})
+        {KeyName = "waterfogend", Edit = {type = "Float", title = "#watereditor.waterfogend", min = 0, max = 40000, order = 4, category = "Fog"}})
     self:NetworkVar("Bool", 2, "EditWaterFogColor", 
         {KeyName = "editwaterfogcolor", Edit = {type = "Boolean", title = "#watereditor.editwaterfogcolor", order = 5, category = "Fog"}})
     self:NetworkVar("Vector", 0, "WaterFogColor", 
