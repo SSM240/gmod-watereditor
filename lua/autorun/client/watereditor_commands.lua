@@ -3,7 +3,7 @@ local WE = WaterEdit
 
 local function GetMaterials()
     WaterEdit_Initialize()
-    local cvarMaterialName = GetConVar("wateredit_material_override"):GetString()
+    local cvarMaterialName = GetConVar("wateredit_mat_override"):GetString()
     local cvarMaterial = Material(cvarMaterialName)
     -- return WE.allWaterMaterials if the cvar is not a valid texture
     if Material(cvarMaterialName):IsError() then return WE.allWaterMaterials end
