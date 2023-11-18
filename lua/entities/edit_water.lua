@@ -18,7 +18,7 @@ function ENT:Initialize()
 end
 
 function ENT:SetupDataTables()
-    -- this feels like it should go in Initialize but this works better for some reason
+    -- this feels like it should go in ENT:Initialize but this works better for some reason
     WaterEdit_Initialize()
 
     local function GetComboOptions()
